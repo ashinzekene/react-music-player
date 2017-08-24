@@ -8,6 +8,9 @@ const SongList = (props) => {
   const playSong = (songIndex) => {
     props.playSong(songIndex)
   }
+  const removeSong = (songIndex) => {
+    props.removeSong(songIndex)
+  }
   if (!props.songs[0]) return (
     <h3 style={{fontWeight:300, textAlign: "center"}}>No Songs, Please Add Music Files</h3>
   )
@@ -17,7 +20,7 @@ const SongList = (props) => {
         {
           props.songs.map((song, ind) => (
             <div>
-              <Song song={song} key={ind} index={ind} playSong={playSong} />
+              <Song song={song} key={ind} index={ind} removeSong={removeSong} playSong={playSong} />
               <Divider key={song.lastModified}/> 
             </div>
           ))
