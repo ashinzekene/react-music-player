@@ -5381,10 +5381,6 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
-redux-store-observer@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/redux-store-observer/-/redux-store-observer-1.0.0.tgz#a0a88bf64e8cfc554ff3beb65c9bf77c489cf030"
-
 redux@^3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"

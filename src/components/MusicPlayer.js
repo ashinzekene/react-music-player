@@ -11,14 +11,23 @@ class MusicPlayer extends React.Component {
     this.state = {
       songs:[],
       nowPlaying: 0,
+      currentTime: 0,
       isPlaying: false,
     }
     this.togglePlaying = this.togglePlaying.bind(this)
     this.play = this.play.bind(this)
     this.playNext = this.playNext.bind(this)
+    this.playPrevious = this.playPrevious.bind(this)
+    this.loadData = this.loadData.bind(this)
   }
   togglePlaying() {
-    this.audioPlayer.paused? this.audioPlayer.play() : this.audioPlayer.pause()
+    if (this.audioPlayer.paused) {
+      this.audioPlayer.play() 
+      this.setState({isPlaying: true})
+    } else {
+      this.audioPlayer.pause()
+      this.setState({isPlaying: false})
+     }
   }
   play(index) {
     console.log("PLAYING", index)
@@ -34,17 +43,31 @@ class MusicPlayer extends React.Component {
     }
   }
   playNext() {
-    this.play(this.state.nowPlaying + 1)
+    this.state.nowPlaying+2 >= this.props.songs.length ? this.play(0) :this.play(this.state.nowPlaying + 1)
+  }
+  playPrevious() {
+    this.state.nowPlaying === 0 ? this.play(this.props.songs.length - 1) :this.play(this.state.nowPlaying - 1)
+  }
+  loadData() {
+    const currentTime = 100 * this.audioPlayer.currentTime / this.audioPlayer.duration
+    this.setState({currentTime})
   }
   render() {
+    const paused = !this.state.isPlaying
     const song = this.props.songs[this.state.nowPlaying] ? this.props.songs[this.state.nowPlaying].name: "No song playing"
     return (
       <div>
         <MyAppBar/>
         <SongList songs={this.props.songs} playSong={this.play} />
         <AddSongs addSongs={this.addSongs } /> 
-        <audio controls hidden onEnded={this.playNext} ref={(audio)=> this.audioPlayer =audio} />
-        <NowPlaying togglePlaying= { this.togglePlaying } nowPlaying={song} />
+        <audio controls hidden onTimeUpdate={ this.loadData } onEnded={this.playNext} ref={(audio)=> this.audioPlayer =audio} />
+        <NowPlaying 
+          togglePlaying= { this.togglePlaying } 
+          playNext= { this.playNext } 
+          isPlaying = { paused }
+          playPrevious= { this.playPrevious }
+          currentTime = { this.state.currentTime }
+          nowPlaying={song} />
       </div>
     )
   }

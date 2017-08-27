@@ -14,7 +14,7 @@ const SongList = (props) => {
     props.playSong(index)
   }
   return (
-    <div>
+    <div style={{marginBottom: "100px"}}>
       <List>
         {
           props.songs.map((song, ind) => (
