@@ -5,22 +5,21 @@ import { List } from 'material-ui/List'
 import Song from './Song'
 
 const SongList = (props) => {
-  const playSong = (songIndex) => {
-    props.playSong(songIndex)
+  if (!props.songs[0]) {
+    return (
+      <h2 style={{fontWeight: 300, textAlign: "center" }}>No Songs Present. Please Add Songs</h2>
+    )
   }
-  const removeSong = (songIndex) => {
-    props.removeSong(songIndex)
+  const playSong = (index) => {
+    props.playSong(index)
   }
-  if (!props.songs[0]) return (
-    <h3 style={{fontWeight:300, textAlign: "center"}}>No Songs, Please Add Music Files</h3>
-  )
   return (
     <div>
       <List>
         {
           props.songs.map((song, ind) => (
-            <div>
-              <Song song={song} key={ind} index={ind} removeSong={removeSong} playSong={playSong} />
+            <div key={"div"+ind}>
+              <Song key={ind} song= { song } playSong={playSong} index= {ind} />
               <Divider key={song.lastModified}/> 
             </div>
           ))

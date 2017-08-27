@@ -4,22 +4,31 @@ import ImageMusicNote from 'material-ui/svg-icons/image/music-note'
 import ActionDelete from 'material-ui/svg-icons/action/delete'
 import Avatar from 'material-ui/Avatar'
 
+import { removeSong } from '../actions'
+import { connect } from 'react-redux'
 
-const Song = (props) => {
-  var handleClick = () => {
-    props.playSong(props.index)
+class Song extends React.Component {
+  handleClick = () => {
+    this.props.playSong(this.props.index)
   }
-  var removeSong = () => {
-    props.removeSong(props.index)
+  removeSong = () => {
+    console.log(this.props.index)
+    this.props.removeSong(this.props.index)
   }
-  return (
-    <ListItem
-      onClick = {handleClick}
-      leftAvatar={<Avatar icon={<ImageMusicNote/>} />}
-      primaryText={props.song.name}
-      rightIconButton={<ActionDelete onClick={ removeSong() } />}
-    />
-  )
+  render() {
+    return (
+      <ListItem
+        onClick={this.handleClick}
+        leftAvatar={<Avatar icon={<ImageMusicNote />} />}
+        primaryText={this.props.song.name}
+        rightIconButton={<ActionDelete onClick={this.removeSong} />}
+      />
+    )
+  }
 }
 
-export default Song
+const mapStateToDispatch = (dispatch) => ({
+  removeSong: (id) => dispatch(removeSong(id)),
+})
+
+export default connect(null,mapStateToDispatch)(Song)

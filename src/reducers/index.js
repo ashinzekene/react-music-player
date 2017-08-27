@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import { songs } from './songs'
+import { songs, nowPlaying, filteredSongs } from './songs'
 
 const reducers = combineReducers({
   songs,
+  nowPlaying,
+  filteredSongs
 })
 
 export default reducers

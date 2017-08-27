@@ -1,7 +1,7 @@
 {
   "short_name": "Music Player",
   "author": "Ashinze Ekene",
-  "name": "Play local music files on the browser",
+  "name": "Music Player",
   "icons": [
     {
       "src": "favicon.ico",
