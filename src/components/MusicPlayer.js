@@ -42,6 +42,9 @@ class MusicPlayer extends React.Component {
       }
     }
   }
+  componentWillRecieveProps(nextProps) {
+    console.log("Receieved new props", nextProps)
+  }
   playNext() {
     this.state.nowPlaying+2 >= this.props.songs.length ? this.play(0) :this.play(this.state.nowPlaying + 1)
   }

@@ -1,6 +1,8 @@
 # MUSIC PLAYER
 
-### A simple react music player that plays local files using the Files API 
+ A simple react music player that plays local files using the Files API 
+
+ [CHECK OUT THE WEB APP](https://ekene-music-player.herokuapp.com)
 
 ## TODO LIST
 1. Play Next Automatically ✅
