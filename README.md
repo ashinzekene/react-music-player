@@ -11,4 +11,5 @@
 1. Shuffle
 1. Playlists
 1. Search
+1. UI
 
