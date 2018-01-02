@@ -4,80 +4,59 @@ import MyAppBar from './MyAppBar'
 import SongList from './SongList'
 import NowPlaying from './NowPlaying'
 import { connect } from 'react-redux'
+import { togglePlaying, playNext, playPrevious, playSong } from "../actions";
+
+const mapStateToProps = (state) => ({
+  songs: state.songs,
+  playState: state.playState
+})
+
+const mapDispatchToProps = dispatch => ({
+  toggle: () => dispatch(togglePlaying()),
+  playSong: () => dispatch(playSong()),
+  playNext: () => dispatch(playNext()),
+  playPrevious: () => dispatch(playPrevious())
+})
 
 class MusicPlayer extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      songs:[],
-      nowPlaying: 0,
-      currentTime: 0,
-      isPlaying: false,
-    }
-    this.togglePlaying = this.togglePlaying.bind(this)
-    this.play = this.play.bind(this)
-    this.playNext = this.playNext.bind(this)
-    this.playPrevious = this.playPrevious.bind(this)
+    this.state = {}
+    this.playSong = this.playSong.bind(this)
     this.loadData = this.loadData.bind(this)
   }
-  togglePlaying() {
-    if (this.audioPlayer.paused) {
-      this.audioPlayer.play() 
-      this.setState({isPlaying: true})
-    } else {
-      this.audioPlayer.pause()
-      this.setState({isPlaying: false})
-     }
-  }
-  play(index) {
-    console.log("PLAYING", index)
+
+  playSong(index) {
     if (this.props.songs[index]) {
+      this.props.playSong()
       var file = new FileReader()
       file.readAsDataURL(this.props.songs[index])
       file.onload = (e) => {
         this.audioPlayer.src = e.target.result
         this.audioPlayer.play()
-        this.setState({isPlaying: true})
-        this.setState({nowPlaying: index})
       }
     }
   }
-  componentWillRecieveProps(nextProps) {
-    console.log("Receieved new props", nextProps)
-  }
-  playNext() {
-    this.state.nowPlaying+2 >= this.props.songs.length ? this.play(0) :this.play(this.state.nowPlaying + 1)
-  }
-  playPrevious() {
-    this.state.nowPlaying === 0 ? this.play(this.props.songs.length - 1) :this.play(this.state.nowPlaying - 1)
-  }
+
   loadData() {
     const currentTime = 100 * this.audioPlayer.currentTime / this.audioPlayer.duration
     this.setState({currentTime})
   }
+
   render() {
-    const paused = !this.state.isPlaying
-    const song = this.props.songs[this.state.nowPlaying] ? this.props.songs[this.state.nowPlaying].name: "No song playing"
+    let { isPlaying, currentTime }= !this.state
+    let { playState, songs } = this.props
     return (
       <div>
         <MyAppBar/>
-        <SongList songs={this.props.songs} playSong={this.play} />
+        <SongList songs={ songs} playSong={ this.playSong } />
         <AddSongs addSongs={this.addSongs } /> 
-        <audio controls hidden onTimeUpdate={ this.loadData } onEnded={this.playNext} ref={(audio)=> this.audioPlayer =audio} />
-        <NowPlaying 
-          togglePlaying= { this.togglePlaying } 
-          playNext= { this.playNext } 
-          isPlaying = { paused }
-          playPrevious= { this.playPrevious }
-          currentTime = { this.state.currentTime }
-          nowPlaying={song} />
+        <audio controls hidden onTimeUpdate={ this.loadData } onEnded={ this.props.playNext } ref={(audio)=> this.audioPlayer =audio} />
+        <NowPlaying playState={ playState } currentTime={ currentTime } />
       </div>
     )
   }
 }
-const mapStateToProps = (state) => ({
-  songs: state.songs
-})
 
 
-export default connect(mapStateToProps)(MusicPlayer)
+export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayer)
