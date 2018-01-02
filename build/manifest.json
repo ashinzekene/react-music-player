@@ -1,0 +1,16 @@
+{
+  "short_name": "Music Player",
+  "author": "Ashinze Ekene",
+  "name": "Music Player",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#7050FA",
+  "background_color": "#ffffff"
+}
