@@ -6,10 +6,11 @@
 
 ## TODO LIST
 1. Play Next Automatically ✅
-1. Controls - Next, Previous, Progress Bar
-1. Saving Songs(localStroage) ✅
+1. Controls - Next, Previous, Progress Bar ✅
+1. Saving Songs(localStroage) ✅ - Needs review
+1. UI
 1. Shuffle
 1. Playlists
 1. Search
-1. UI
-
+1. A Page for currently song
+1. Host on GitHub
