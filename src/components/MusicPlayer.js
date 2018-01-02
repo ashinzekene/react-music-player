@@ -1,6 +1,6 @@
 import React from 'react';
-import AddSongs from './AddSongs' 
-import MyAppBar from './MyAppBar' 
+import AddSongs from './AddSongs'
+import MyAppBar from './MyAppBar'
 import SongList from './SongList'
 import NowPlaying from './NowPlaying'
 import { connect } from 'react-redux'
@@ -13,7 +13,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
   toggle: () => dispatch(togglePlaying()),
-  playSong: () => dispatch(playSong()),
   playNext: () => dispatch(playNext()),
   playPrevious: () => dispatch(playPrevious())
 })
@@ -23,14 +22,31 @@ class MusicPlayer extends React.Component {
     super(props)
     this.state = {}
     this.playSong = this.playSong.bind(this)
-    this.loadData = this.loadData.bind(this)
+    this.loadTime = this.loadTime.bind(this)
   }
 
-  playSong(index) {
-    if (this.props.songs[index]) {
-      this.props.playSong()
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.playState !== this.props.playState) {
+      if (!nextProps.playState.playing) {
+        // RESUME PAUSE
+        console.log("pausing")
+        this.audioPlayer.pause()
+      } else if (nextProps.playState.song === this.props.playState.song) {
+        console.log("resuming")
+        // RESUME PLAYING
+        this.audioPlayer.play()
+      } else {
+        console.log("Playing")
+        this.playSong(nextProps)
+      }
+
+    }
+  }
+
+  playSong(props) {
+    if (props.songs[props.playState.song]) {
       var file = new FileReader()
-      file.readAsDataURL(this.props.songs[index])
+      file.readAsDataURL(props.songs[props.playState.song])
       file.onload = (e) => {
         this.audioPlayer.src = e.target.result
         this.audioPlayer.play()
@@ -38,21 +54,22 @@ class MusicPlayer extends React.Component {
     }
   }
 
-  loadData() {
+  loadTime() {
+    // Move later to state
     const currentTime = 100 * this.audioPlayer.currentTime / this.audioPlayer.duration
-    this.setState({currentTime})
+    this.setState({ currentTime })
   }
 
   render() {
-    let { isPlaying, currentTime }= !this.state
-    let { playState, songs } = this.props
+    let { currentTime } = this.state
+    let { songs, playState } = this.props
     return (
       <div>
-        <MyAppBar/>
-        <SongList songs={ songs} playSong={ this.playSong } />
-        <AddSongs addSongs={this.addSongs } /> 
-        <audio controls hidden onTimeUpdate={ this.loadData } onEnded={ this.props.playNext } ref={(audio)=> this.audioPlayer =audio} />
-        <NowPlaying playState={ playState } currentTime={ currentTime } />
+        <MyAppBar />
+        <SongList songs={songs} />
+        <AddSongs />
+        <audio controls hidden onTimeUpdate={this.loadTime} onEnded={this.props.playNext} ref={(audio) => this.audioPlayer = audio} />
+        <NowPlaying playState={ playState } songs={songs} currentTime={currentTime} />
       </div>
     )
   }

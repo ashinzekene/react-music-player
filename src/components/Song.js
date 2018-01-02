@@ -1,11 +1,17 @@
 import React from 'react';
 import { ListItem } from 'material-ui/List'
+import { connect } from 'react-redux'
 import ImageMusicNote from 'material-ui/svg-icons/image/music-note'
 import ActionDelete from 'material-ui/svg-icons/action/delete'
 import Avatar from 'material-ui/Avatar'
 
-import { removeSong } from '../actions'
-import { connect } from 'react-redux'
+import { removeSong, playSong } from '../actions'
+
+const mapStateToDispatch = (dispatch) => ({
+  removeSong: id => dispatch(removeSong(id)),
+  playSong: id => dispatch(playSong(id))
+})
+
 
 class Song extends React.Component {
   handleClick = () => {
@@ -18,17 +24,14 @@ class Song extends React.Component {
   render() {
     return (
       <ListItem
-        onClick={this.handleClick}
-        leftAvatar={<Avatar icon={<ImageMusicNote />} />}
-        primaryText={this.props.song.name}
-        rightIconButton={<ActionDelete onClick={this.removeSong} />}
+      onClick={this.handleClick}
+      leftAvatar={<Avatar icon={<ImageMusicNote />} />}
+      primaryText={this.props.song.name}
+      rightIconButton={<ActionDelete onClick={this.removeSong} />}
       />
     )
   }
 }
-
-const mapStateToDispatch = (dispatch) => ({
-  removeSong: (id) => dispatch(removeSong(id)),
-})
+  
 
 export default connect(null,mapStateToDispatch)(Song)

@@ -10,8 +10,6 @@ injectTapEventPlugin()
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: indigo400,
-    primary2Color:  indigo400,
-    primary3Color: indigo400,
   }
 });
 

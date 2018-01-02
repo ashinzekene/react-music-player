@@ -4,6 +4,11 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import { addSongs } from '../actions'
 import { connect } from 'react-redux';
 
+const mapDispatchToProps = dispatch => ({
+  addSongs: (songs) =>  dispatch(addSongs(songs)),
+})
+
+
 class AddSongs extends React.Component {
   constructor(props) {
     super(props)
@@ -25,9 +30,5 @@ class AddSongs extends React.Component {
     )
   }
 }
-
-const mapDispatchToProps = dispatch => ({
-  addSongs: (songs) =>  dispatch(addSongs(songs)),
-})
 
 export default connect(null, mapDispatchToProps)(AddSongs)

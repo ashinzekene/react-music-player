@@ -4,7 +4,7 @@ export const TOGGLE_PLAYING = 'TOGGLE_PLAYING'
 export const FILTER_SONGS = 'FILTER_SONGS'
 export const PLAY_SONG = 'PLAY_SONG'
 export const PLAY_NEXT = 'PLAY_NEXT'
-export const PLAY_PREVIOUS = 'PLAY_NEXT'
+export const PLAY_PREVIOUS = 'PLAY_PREVIOUS'
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR'
 
 export const addSongs = (songs) => ({
@@ -12,12 +12,12 @@ export const addSongs = (songs) => ({
   songs
 })
 
-export const removeSong = (id) => ({
+export const removeSong = id => ({
   type: REMOVE_SONGS,
   id
 })
 
-export const playSong = (id) => ({
+export const playSong = id => ({
   type: PLAY_SONG,
   id
 })
@@ -27,9 +27,8 @@ export const filterSong = (filter) => ({
   filter
 })
 
-export const togglePlaying = (id) => ({
-  type: TOGGLE_PLAYING,
-  id
+export const togglePlaying = () => ({
+  type: TOGGLE_PLAYING
 })
 
 export const playNext = () => ({
