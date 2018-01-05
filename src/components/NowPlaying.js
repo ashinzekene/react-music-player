@@ -22,12 +22,12 @@ const mapDispatchToProps = dispatch => ({
 class NowPlaying extends React.Component {
   render() {
     const { playState, songs, currentTime } = this.props
-    console.log(currentTime) 
     const button = playState.playing ? <AVPauseCirleOutline /> : <AvPlayCircleFilled/> 
     return (
-      <Paper style={{backgroundColor: "white", zIndex: "4000", position: "fixed", bottom: "0px", left: "0px", width: "100%", height: "100px"}} zDepth={5} rounded={false}>
-        <LinearProgress style={{margin:"5px 20px"}} mode="determinate" min={0} max={100} value={this.props.currentTime} />
+      <Paper className="paper-div" zDepth={5} rounded={false}>
+        <LinearProgress className="song-progress" mode="determinate" min={0} max={100} value={this.props.currentTime} />
         <ListItem
+          style={{ height: "50px" }}
           leftIcon={<Avatar icon={<ImageMusicNote/>}/>}
           rightIconButton={
             <div>
