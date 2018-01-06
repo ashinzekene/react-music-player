@@ -4,12 +4,22 @@ body {
   font-family: sans-serif;
 }
 
-.paper-div {
+.small-now-playing {
   background-color: white;
   z-index: 4000;
   position: fixed;
   bottom: 0px;
   left: 0px;
   width: 100%;
-  height: 100px;
+  height: 90px;
+}
+
+.small-now-playing .song-title {
+  width: Calc( 85% - 60px );
+  padding: 10px;
+}
+.small-now-playing .play-pause-button {
+  display: flex;
+  float: left;
+  width: 60px;
 }

@@ -13,4 +13,4 @@
 1. Playlists
 1. Search
 1. A Page for currently song
-1. Host on GitHub
+1. Host on GitHub ✅

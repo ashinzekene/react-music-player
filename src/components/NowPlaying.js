@@ -24,22 +24,37 @@ class NowPlaying extends React.Component {
     const { playState, songs, currentTime } = this.props
     const button = playState.playing ? <AVPauseCirleOutline /> : <AvPlayCircleFilled/> 
     return (
-      <Paper className="paper-div" zDepth={5} rounded={false}>
+      <Paper className="small-now-playing" zDepth={5} rounded={false}>
         <LinearProgress className="song-progress" mode="determinate" min={0} max={100} value={this.props.currentTime} />
-        <ListItem
-          style={{ height: "50px" }}
+        <div style={{display: "flex", padding: "20px 10px" }} className="now-playing-container">
+          <div style={{ width: "15%" }}>
+            <Avatar icon={<ImageMusicNote/>} />
+          </div>
+          <div className="song-title">
+            { songs[playState.song] && songs[playState.song].name }
+          </div>
+          <div className="play-pause-button">
+            <IconButton onClick={this.props.togglePlaying} >{button}</IconButton>
+          </div>
+        </div>
+        {/* <ListItem
+          style={listItemStyle}
           leftIcon={<Avatar icon={<ImageMusicNote/>}/>}
           rightIconButton={
-            <div>
+            <div style={{ height: "100%" }}>
               <IconButton onClick={this.props.playPrevious} ><AVSkipPrevious/></IconButton>
               <IconButton onClick={this.props.togglePlaying} >{button}</IconButton>
               <IconButton onClick={this.props.playNext} ><AVSkipNext/></IconButton>
             </div>}
           primaryText= { songs[playState.song] && songs[playState.song].name }
-        />
+        /> */}
       </Paper>
     )
   }
+}
+
+const listItemStyle = {
+  height: "100px",
 }
 
 export default connect(null, mapDispatchToProps)(NowPlaying);

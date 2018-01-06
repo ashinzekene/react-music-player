@@ -25,5 +25,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://ashinzekene.github.io/music-player"
+  "homepage": "https://ashinzekene.github.io/react-music-player"
 }
