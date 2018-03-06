@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import AddSongs from '../components/AddSongs';
-import MyAppBar from '../components/MyAppBar'
+import Header from '../components/Header'
 import SongList from '../components/SongList'
 import NowPlaying from '../components/NowPlaying'
 import { togglePlaying, playSong } from "../actions";
@@ -87,7 +87,7 @@ class MainView extends Component {
     let { songs, playState } = this.props
     return (
       <div>
-        <MyAppBar />
+        <Header />
         <SongList songs={songs} />
         <AddSongs />
         <audio controls hidden onTimeUpdate={this.updateTime} onEnded={this.songEnded} ref={(audio) => this.audioPlayer = audio} />

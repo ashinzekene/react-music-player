@@ -14,7 +14,6 @@ import ImageMusicNote from 'material-ui/svg-icons/image/music-note'
 const NowPlaying = props => {
   const { playState, song, currentTime, togglePlaying } = props
   const button = playState.playing ? <AVPauseCirleOutline /> : <AvPlayCircleFilled />
-  console.log("SONG ID ----", playState.songId)
   return (
     <Paper className="small-now-playing" zDepth={5} rounded={false}>
       <LinearProgress className="song-progress" mode="determinate" min={0} max={100} value={currentTime} />

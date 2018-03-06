@@ -1,4 +1,4 @@
-import { HOME_PAGE, NOW_PLAYING_PAGE, PLAYLIST_PAGE } from "../actions/index";
+import { HOME_PAGE, NOW_PLAYING_PAGE, SETTINGS_PAGE } from "../actions/index";
 
 export default (state = HOME_PAGE, action) => {
   switch (action.type) {
@@ -10,6 +10,9 @@ export default (state = HOME_PAGE, action) => {
     }
     case NOW_PLAYING_PAGE: {
       return NOW_PLAYING_PAGE
+    }
+    case SETTINGS_PAGE: {
+      return SETTINGS_PAGE
     }
   }
 }

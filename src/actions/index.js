@@ -4,10 +4,11 @@ export const TOGGLE_PLAYING = 'TOGGLE_PLAYING'
 export const FILTER_SONGS = 'FILTER_SONGS'
 export const PLAY_SONG = 'PLAY_SONG'
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR'
-export const HOME_PAGE = 'HOME_PAGE'
-export const NOW_PLAYING_PAGE = 'NOW_PLAYING_PAGE'
 export const PLAYLIST_PAGE = 'PLAYLIST_PAGE'
 export const SHUFFLE = 'SHUFFLE'
+export const HOME_PAGE = 'HOME_PAGE'
+export const SETTINGS_PAGE = 'SETTINGS_PAGE'
+export const NOW_PLAYING_PAGE = 'NOW_PLAYING_PAGE'
 
 export const addSongs = songs => ({
   type: ADD_SONGS,
@@ -42,10 +43,14 @@ export const filterSong = filter => ({
   filter
 })
 
-export const goHome = () => ({
+export const homePage = () => ({
   type: HOME_PAGE
 })
 
-export const goToNowPlaying = () => ({
+export const playingPage = () => ({
   type: NOW_PLAYING_PAGE
+})
+
+export const settingsPage = () => ({
+  type: SETTINGS_PAGE
 })
