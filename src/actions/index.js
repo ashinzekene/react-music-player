@@ -48,7 +48,7 @@ export const homePage = () => ({
   type: HOME_PAGE
 })
 
-export const playingPage = () => ({
+export const nowPlayingPage = () => ({
   type: NOW_PLAYING_PAGE
 })
 

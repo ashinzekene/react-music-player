@@ -6,7 +6,7 @@ import AddSongs from '../components/AddSongs';
 import Header from '../components/Header'
 import SongList from '../components/SongList'
 import NowPlaying from '../components/NowPlaying'
-import { togglePlaying, playSong } from "../actions";
+import { togglePlaying, playSong, nowPlayingPage } from "../actions";
 
 const mapStateToProps = state => ({
   songs: state.songs,
@@ -16,7 +16,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   toggle: () => dispatch(togglePlaying()),
-  playSong: id => dispatch(playSong(id))
+  playSong: id => dispatch(playSong(id)),
+  openNowPlaying: () => dispatch(nowPlayingPage())
 })
 
 class MainView extends Component {
@@ -36,7 +37,6 @@ class MainView extends Component {
         // Start playing
       } else {
         this.playSong(nextProps.playState.songId)
-
       }
     }
   }
@@ -84,14 +84,20 @@ class MainView extends Component {
 
   render() {
     let { currentTime } = this.state
-    let { songs, playState } = this.props
+    let { songs, playState, openNowPlaying } = this.props
     return (
       <div>
         <Header />
         <SongList songs={songs} />
         <AddSongs />
         <audio controls hidden onTimeUpdate={this.updateTime} onEnded={this.songEnded} ref={(audio) => this.audioPlayer = audio} />
-        <NowPlaying togglePlaying={this.props.toggle} playState={playState} playNext={this.playNext} song={songs[playState.songId]} currentTime={currentTime} />
+        <NowPlaying
+          togglePlaying={this.props.toggle}
+          playState={playState}
+          playNext={this.playNext}
+          song={songs[playState.songId]}
+          openNowPlaying={ openNowPlaying }
+          currentTime={currentTime} />
       </div>
     )
   }
