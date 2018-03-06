@@ -45,3 +45,11 @@ export const playPrevious = () => ({
 export const toggleSidebar = () => ({
   type: TOGGLE_SIDEBAR
 })
+
+export const goHome = () => ({
+  type: HOME_PAGE
+})
+
+export const goToNowPlaying = () => ({
+  type: NOW_PLAYING_PAGE
+})

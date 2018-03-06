@@ -5,6 +5,7 @@
  [CHECK OUT THE WEB APP](https://ashinzekene.github.io/music-player)
 
 ## TODO LIST
+
 1. Play Next Automatically ✅
 1. Controls - Next, Previous, Progress Bar ✅
 1. Saving Songs(localStroage) ✅ - Needs review
