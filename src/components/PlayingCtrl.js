@@ -20,22 +20,23 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const PlayingCtrl = props => {
-  const { playState, song, currentTime, togglePlaying } = props
+  const { playState, song, playNext, playPrevious, toggle, togglePlaying, changeRepeat, currentTime } = props
   const button = playState.playing ?  "play_circle_filled" : "pause_circle_filled"
+  const repeat_type = repeat === 0 ? "" : repeat === 1 ? "repeat" : "repeat_one"
   return (
     <Paper className="play-control" zDepth={5} rounded={false}>
       <h3 className="song-title">{ song.name }</h3>
       <LinearProgress className="song-progress" mode="determinate" min={0} max={100} value={currentTime} />
       <div style={{ display: "flex", padding: "20px 10px" }} className="now-playing-container">
         <div style={{ width: "35%", textAlign: "center" }} className="side-icons">
-          <FontIcon className="material-icons">repeat</FontIcon>
-          <FontIcon className="material-icons">skip_previous</FontIcon>
+          <FontIcon onClick={ changeRepeat } className="material-icons">repeat_type</FontIcon>
+          <FontIcon onClick={ playPrevious } className="material-icons">skip_previous</FontIcon>
         </div>
         <div style={{ width: "30%", textAlign: "center" }} className="play-pause-button">
-          <FontIcon style={{ fontSize: "50px", width: "50px" }} className="material-icons">{ button }</FontIcon>
+          <FontIcon onClick={ togglePlaying } style={{ fontSize: "50px", width: "50px" }} className="material-icons">{ button }</FontIcon>
         </div>
         <div style={{ width: "35%", textAlign: "center" }} className="side-icons">
-          <FontIcon className="material-icons">skip_next</FontIcon>
+          <FontIcon onClick={ playNext } className="material-icons">skip_next</FontIcon>
           <FontIcon className="material-icons">shuffle</FontIcon>
         </div>
       </div>

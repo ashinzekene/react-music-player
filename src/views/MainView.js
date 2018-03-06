@@ -11,7 +11,7 @@ import { togglePlaying, playSong, nowPlayingPage } from "../actions";
 const mapStateToProps = state => ({
   songs: state.songs,
   playState: state.playState,
-  shuffle: state.common.shuffle,
+  repeat: state.common.repeat,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -79,6 +79,7 @@ class MainView extends Component {
 
   updateTime = () => {
     const currentTime = 100 * this.audioPlayer.currentTime / this.audioPlayer.duration
+    this.props.currentTime(currentTime)
     this.setState({ currentTime })
   }
 
@@ -106,7 +107,8 @@ class MainView extends Component {
 MainView.propTypes = {
   songs: propTypes.array.isRequired,
   playState: propTypes.object.isRequired,
-  shuffle: propTypes.number
+  repeat: propTypes.number.isRequired,
+  currentTime: propTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainView)

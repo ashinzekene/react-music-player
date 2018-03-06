@@ -4,7 +4,7 @@ import { indigo400, } from 'material-ui/styles/colors'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import { connect } from 'react-redux';
-import { HOME_PAGE, NOW_PLAYING_PAGE, SETTINGS_PAGE } from './actions'
+import { NOW_PLAYING_PAGE } from './actions'
 
 import MainView from './views/MainView';
 import PlayingView from './views/PlayingView';
@@ -22,14 +22,17 @@ const mapStateToProps = state => ({
 })
 
 const App = props => {
-  console.log(props)
+  let currentTime = 0
+  const changeTime = newTime => () => {
+    currentTime = newTime
+  } 
   return (
     <MuiThemeProvider muiTheme={muiTheme}>
       <div>
         {
           props.page === NOW_PLAYING_PAGE ?
-           <PlayingView /> :
-           <MainView />
+           <PlayingView currentTime={ currentTime } /> :
+           <MainView currentTime={ changeTime(newTime) }  />
         }
       </div>
     </MuiThemeProvider>
