@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { indigo400 } from 'material-ui/styles/colors'
+import { indigo400, } from 'material-ui/styles/colors'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import { connect } from 'react-redux';
