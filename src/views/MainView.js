@@ -8,7 +8,7 @@ import SongList from '../components/SongList'
 import NowPlaying from '../components/NowPlaying'
 import { togglePlaying, playSong } from "../actions";
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   songs: state.songs,
   playState: state.playState,
   shuffle: state.common.shuffle,

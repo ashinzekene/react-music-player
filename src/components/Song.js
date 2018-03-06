@@ -25,9 +25,10 @@ class Song extends React.Component {
   render() {
     return (
       <ListItem
+      className="song"
       onClick={this.handleClick}
       leftAvatar={<Avatar icon={<ImageMusicNote />} />}
-      primaryText={this.props.song.name}
+    primaryText={ <div className="song-title">{ this.props.song.name}</div> }
       rightIconButton={<ActionDelete  />}
       />
     )
