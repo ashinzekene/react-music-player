@@ -15,6 +15,7 @@ const mapStateToDispatch = (dispatch) => ({
 
 class Song extends React.Component {
   handleClick = () => {
+    console.log("SONG ID", this.props.index)
     this.props.playSong(this.props.index)
   }
   removeSong = () => {

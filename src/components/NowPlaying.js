@@ -7,37 +7,29 @@ import LinearProgress from 'material-ui/LinearProgress';
 import AvPlayCircleFilled from 'material-ui/svg-icons/av/play-circle-filled'
 import AVPauseCirleOutline from 'material-ui/svg-icons/av/pause-circle-outline'
 import ImageMusicNote from 'material-ui/svg-icons/image/music-note'
-import AVSkipNext from 'material-ui/svg-icons/av/skip-next'
-import AVSkipPrevious from 'material-ui/svg-icons/av/skip-previous'
-import { connect } from "react-redux";
-import { togglePlaying, playPrevious, playNext } from '../actions/index';
-
-const mapDispatchToProps = dispatch => ({
-  playNext: () => dispatch(playNext()),
-  playPrevious: () => dispatch(playPrevious()),
-  togglePlaying: ()=> dispatch(togglePlaying()),
-})
+// import AVSkipNext from 'material-ui/svg-icons/av/skip-next'
+// import AVSkipPrevious from 'material-ui/svg-icons/av/skip-previous'
 
 
-class NowPlaying extends React.Component {
-  render() {
-    const { playState, songs, currentTime } = this.props
-    const button = playState.playing ? <AVPauseCirleOutline /> : <AvPlayCircleFilled/> 
-    return (
-      <Paper className="small-now-playing" zDepth={5} rounded={false}>
-        <LinearProgress className="song-progress" mode="determinate" min={0} max={100} value={this.props.currentTime} />
-        <div style={{display: "flex", padding: "20px 10px" }} className="now-playing-container">
-          <div style={{ width: "15%" }}>
-            <Avatar icon={<ImageMusicNote/>} />
-          </div>
-          <div className="song-title">
-            { songs[playState.song] && songs[playState.song].name }
-          </div>
-          <div className="play-pause-button">
-            <IconButton onClick={this.props.togglePlaying} >{button}</IconButton>
-          </div>
+const NowPlaying = props => {
+  const { playState, song, currentTime, togglePlaying } = props
+  const button = playState.playing ? <AVPauseCirleOutline /> : <AvPlayCircleFilled />
+  console.log("SONG ID ----", playState.songId)
+  return (
+    <Paper className="small-now-playing" zDepth={5} rounded={false}>
+      <LinearProgress className="song-progress" mode="determinate" min={0} max={100} value={currentTime} />
+      <div style={{ display: "flex", padding: "20px 10px" }} className="now-playing-container">
+        <div style={{ width: "15%" }}>
+          <Avatar icon={<ImageMusicNote />} />
         </div>
-        {/* <ListItem
+        <div className="song-title">
+          {song && song.name}
+        </div>
+        <div className="play-pause-button">
+          <IconButton onClick={togglePlaying} >{button}</IconButton>
+        </div>
+      </div>
+      {/* <ListItem
           style={listItemStyle}
           leftIcon={<Avatar icon={<ImageMusicNote/>}/>}
           rightIconButton={
@@ -48,13 +40,12 @@ class NowPlaying extends React.Component {
             </div>}
           primaryText= { songs[playState.song] && songs[playState.song].name }
         /> */}
-      </Paper>
-    )
-  }
+    </Paper>
+  )
 }
 
 const listItemStyle = {
   height: "100px",
 }
 
-export default connect(null, mapDispatchToProps)(NowPlaying);
+export default NowPlaying;
