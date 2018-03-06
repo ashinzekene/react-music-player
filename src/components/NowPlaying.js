@@ -1,6 +1,6 @@
 import React from 'react';
 import Avatar from 'material-ui/Avatar'
-import { ListItem } from 'material-ui/List'
+// import { ListItem } from 'material-ui/List'
 import Paper from 'material-ui/Paper'
 import IconButton from 'material-ui/IconButton';
 import LinearProgress from 'material-ui/LinearProgress';
@@ -41,10 +41,6 @@ const NowPlaying = props => {
         /> */}
     </Paper>
   )
-}
-
-const listItemStyle = {
-  height: "100px",
 }
 
 export default NowPlaying;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 import AddSongs from '../components/AddSongs';
 import Header from '../components/Header'
@@ -64,14 +64,14 @@ class MainView extends Component {
   }
 
   playNext = () => {
-    const { songs, playState, shuffle } = this.props
+    const { songs, playState } = this.props
     URL.revokeObjectURL(songs[playState.songId])
     let nextSongId = (playState.songId + 1) % songs.length
     this.props.playSong(nextSongId)
   }
 
   playPrevious = () => {
-    const { songs, playState, shuffle } = this.props
+    const { songs, playState } = this.props
     URL.revokeObjectURL(songs[playState.songId])
     let nextSongId = playState.songId === 0 ? songs.length - 1 : playState.songId + 1//(playState.songId + ((songs.length - 1)) % songs.length
     this.props.playSong(nextSongId)
@@ -95,6 +95,12 @@ class MainView extends Component {
       </div>
     )
   }
+}
+
+MainView.propTypes = {
+  songs: propTypes.array.isRequired,
+  playState: propTypes.object.isRequired,
+  shuffle: propTypes.number
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainView)

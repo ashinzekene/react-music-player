@@ -28,7 +28,7 @@ class Song extends React.Component {
       onClick={this.handleClick}
       leftAvatar={<Avatar icon={<ImageMusicNote />} />}
       primaryText={this.props.song.name}
-      rightIconButton={<ActionDelete onClick={this.removeSong} />}
+      rightIconButton={<ActionDelete  />}
       />
     )
   }

@@ -1,4 +1,4 @@
-import { PLAY_SONG, TOGGLE_PLAYING, PLAY_NEXT, PLAY_PREVIOUS } from "../actions/index";
+import { PLAY_SONG, TOGGLE_PLAYING } from "../actions/index";
 
 const initalState = {
   playing: false,

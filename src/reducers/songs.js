@@ -1,4 +1,4 @@
-import { ADD_SONGS, REMOVE_SONGS, PLAY_SONG, FILTER_SONGS, PLAYING_SONG } from '../actions'
+import { ADD_SONGS, REMOVE_SONGS } from '../actions'
 
 export default (state= [], action) => {
   switch (action.type) {
