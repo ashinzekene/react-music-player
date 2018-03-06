@@ -2,7 +2,7 @@
 
  A simple react music player that plays local files using the Files API 
 
- [CHECK OUT THE WEB APP](https://ashinzekene.github.io/music-player)
+ [CHECK OUT THE WEB APP](https://ashinzekene.github.io/react-music-player)
 
 ## TODO LIST
 
