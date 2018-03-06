@@ -32,7 +32,7 @@ class PlayingView extends Component {
   playPrevious = () => {
     const { songs, playState } = this.props
     URL.revokeObjectURL(songs[playState.songId])
-    let nextSongId = playState.songId === 0 ? songs.length - 1 : playState.songId + 1//(playState.songId + ((songs.length - 1)) % songs.length
+    let nextSongId = playState.songId === 0 ? songs.length - 1 : playState.songId - 1//(playState.songId + ((songs.length - 1)) % songs.length
     this.props.playSong(nextSongId)
   }
 
@@ -52,13 +52,13 @@ class PlayingView extends Component {
         </div>
         <PlayingCtrl
           currentTime= { currentTime }
+          changeRepeat={ this.repeat }
           song={ songs[playState.songId] }
           playNext={ this.playNext }
           playPrevious= { this.playPrevious }
+          playState={ playState }
           repeat={ repeat }
-          toggle={ this.props.toggle() }
-          changeRepeat={ this.repeat }
-          playState={ playState } />
+          toggle={ this.props.toggle } />
       </div>
     )
   }

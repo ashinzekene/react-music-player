@@ -20,8 +20,8 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const PlayingCtrl = props => {
-  const { playState, song, playNext, playPrevious, toggle, togglePlaying, changeRepeat, currentTime } = props
-  const button = playState.playing ?  "play_circle_filled" : "pause_circle_filled"
+  const { playState, song, playNext, playPrevious, toggle, changeRepeat, currentTime, repeat } = props
+  const button = playState.playing ?  "pause_circle_filled" : "play_circle_filled"
   const repeat_type = repeat === 0 ? "" : repeat === 1 ? "repeat" : "repeat_one"
   return (
     <Paper className="play-control" zDepth={5} rounded={false}>
@@ -33,7 +33,7 @@ const PlayingCtrl = props => {
           <FontIcon onClick={ playPrevious } className="material-icons">skip_previous</FontIcon>
         </div>
         <div style={{ width: "30%", textAlign: "center" }} className="play-pause-button">
-          <FontIcon onClick={ togglePlaying } style={{ fontSize: "50px", width: "50px" }} className="material-icons">{ button }</FontIcon>
+          <FontIcon onClick={ toggle } style={{ fontSize: "50px", width: "50px" }} className="material-icons">{ button }</FontIcon>
         </div>
         <div style={{ width: "35%", textAlign: "center" }} className="side-icons">
           <FontIcon onClick={ playNext } className="material-icons">skip_next</FontIcon>

@@ -15,7 +15,7 @@ const NowPlaying = props => {
   const { playState, song, currentTime, togglePlaying, openNowPlaying } = props
   const button = playState.playing ? <AVPauseCirleOutline /> : <AvPlayCircleFilled />
   return (
-    <Paper onClick={ openNowPlaying } className="small-now-playing" zDepth={5} rounded={false}>
+    <Paper className="small-now-playing" zDepth={5} rounded={false}>
       <LinearProgress className="song-progress" mode="determinate" min={0} max={100} value={currentTime} />
       <div style={{ display: "flex", padding: "20px 10px" }} className="now-playing-container">
         <div style={{ width: "15%" }}>
