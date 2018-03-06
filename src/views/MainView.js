@@ -51,15 +51,15 @@ class MainView extends Component {
   }
 
   songEnded = () => {
-    const { songs, playState, shuffle } = this.props
-    // No shuffle
-    if (shuffle === 0) {
+    const { songs, playState, repeat } = this.props
+    // No repeat
+    if (repeat === 0) {
       URL.revokeObjectURL(songs[playState.songId])
       playState.songId < songs.length && this.props.playSong(playState.songId + 1)
     }
-    // Shuffle 1
-    else if (shuffle === 1) this.props.playSong(playState.id)
-    // shuffle all
+    // repeat 1
+    else if (repeat === 1) this.props.playSong(playState.id)
+    // repeat all
     else this.playNext()
   }
 

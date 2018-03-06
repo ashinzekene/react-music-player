@@ -6,6 +6,7 @@ export const PLAY_SONG = 'PLAY_SONG'
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR'
 export const PLAYLIST_PAGE = 'PLAYLIST_PAGE'
 export const SHUFFLE = 'SHUFFLE'
+export const REPEAT = 'REPEAT'
 export const HOME_PAGE = 'HOME_PAGE'
 export const SETTINGS_PAGE = 'SETTINGS_PAGE'
 export const NOW_PLAYING_PAGE = 'NOW_PLAYING_PAGE'
@@ -25,8 +26,8 @@ export const playSong = id => ({
   id
 })
 
-export const shuffle = id => ({
-  type: SHUFFLE,
+export const repeat = id => ({
+  type: REPEAT,
   id
 })
 

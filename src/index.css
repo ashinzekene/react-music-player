@@ -42,6 +42,7 @@ body {
 
 .play-control .song-title {
   padding: 0px 12px;
+  font-weight: 400;
   text-align: center;
   white-space: nowrap;
   text-overflow: ellipsis;
