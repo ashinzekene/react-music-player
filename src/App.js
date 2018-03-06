@@ -38,18 +38,14 @@ class App extends Component {
   
   componentWillReceiveProps(nextProps) {
     if (nextProps.playState !== this.props.playState) {
-      console.log("CHANGE")
       if (!nextProps.playState.playing) {
-        console.log("Pause")
         // PAUSE
         this.audioPlayer.pause()
       } else if (nextProps.playState.songId === this.props.playState.songId) {
         // RESUME
-        console.log("play")
         this.audioPlayer.play()
         // Start playing
       } else {
-        console.log("play")
         this.playSong(nextProps.playState.songId)
       }
     }

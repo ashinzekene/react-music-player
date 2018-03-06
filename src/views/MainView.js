@@ -45,7 +45,7 @@ MainView.propTypes = {
   songs: propTypes.array.isRequired,
   playState: propTypes.object.isRequired,
   repeat: propTypes.number.isRequired,
-  currentTime: propTypes.func.isRequired
+  currentTime: propTypes.number.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainView)

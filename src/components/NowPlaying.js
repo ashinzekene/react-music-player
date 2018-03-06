@@ -18,13 +18,15 @@ const NowPlaying = props => {
     <Paper className="small-now-playing" zDepth={5} rounded={false}>
       <LinearProgress className="song-progress" mode="determinate" min={0} max={100} value={currentTime} />
       <div style={{ display: "flex", padding: "20px 10px" }} className="now-playing-container">
-        <div style={{ width: "15%" }}>
-          <Avatar icon={<ImageMusicNote />} />
+        <div style={{ width: "90%" }} onClick={ openNowPlaying } >
+          <div style={{ width: "15%", display: "inline-block" }}>
+            <Avatar icon={<ImageMusicNote />} />
+          </div>
+          <div style={{ display: "inline-block", width: "77%" }} className="song-title">
+            {song && song.name}
+          </div>
         </div>
-        <div className="song-title">
-          {song && song.name}
-        </div>
-        <div className="play-pause-button">
+        <div style={{ width: "50px" }} className="play-pause-button">
           <IconButton onClick={togglePlaying} >{button}</IconButton>
         </div>
       </div>

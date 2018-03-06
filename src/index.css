@@ -33,7 +33,7 @@ body {
   padding-bottom: 10px;
   height: 140px;
 }
-.song .song-title {
+.song-title {
   padding: 0px 12px;
   white-space: nowrap;
   text-overflow: ellipsis;

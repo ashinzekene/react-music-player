@@ -24,7 +24,6 @@ class Header extends Component {
   }
 
   openPage = page => () => {
-    console.log("Toggle page")
     page && this.props.openPage(page)
     this.setState(prevState => ({ open: !prevState.open }))
   }
