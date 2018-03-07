@@ -6,23 +6,21 @@ import AddSongs from '../components/AddSongs';
 import Header from '../components/Header'
 import SongList from '../components/SongList'
 import NowPlaying from '../components/NowPlaying'
-import { togglePlaying, playSong, nowPlayingPage } from "../actions";
+import { togglePlaying, nowPlayingPage } from "../actions";
 
 const mapStateToProps = state => ({
   songs: state.songs,
   playState: state.playState,
-  repeat: state.common.repeat,
 })
 
 const mapDispatchToProps = dispatch => ({
   toggle: () => dispatch(togglePlaying()),
-  playSong: id => dispatch(playSong(id)),
   openNowPlaying: () => dispatch(nowPlayingPage())
 })
 
 class MainView extends Component {
   render() {
-    let { songs, playState, openNowPlaying, currentTime,playNext, playPrevious } = this.props
+    let { songs, playState, openNowPlaying, currentTime, playNext, playPrevious } = this.props
     return (
       <div>
         <Header />
@@ -42,9 +40,12 @@ class MainView extends Component {
 }
 
 MainView.propTypes = {
+  openNowPlaying: propTypes.func.isRequired,
+  playNext: propTypes.func.isRequired,
+  toggle: propTypes.func.isRequired,
+  playPrevious: propTypes.func.isRequired,
   songs: propTypes.array.isRequired,
   playState: propTypes.object.isRequired,
-  repeat: propTypes.number.isRequired,
   currentTime: propTypes.number.isRequired
 }
 

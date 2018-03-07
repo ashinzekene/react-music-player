@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 
 import { playSong, repeat } from '../actions';
-import Avatar from 'material-ui/Avatar'
-// import { ListItem } from 'material-ui/List'
 import Paper from 'material-ui/Paper'
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
@@ -22,27 +20,26 @@ const mapDispatchToProps = dispatch => ({
 const PlayingCtrl = props => {
   const { playState, song, playNext, playPrevious, toggle, changeRepeat, currentTime, repeatType } = props
   const button = playState.playing ?  "pause_circle_filled" : "play_circle_filled"
-  console.log("repear type", repeatType)
   const repeatButton = repeatType === 0 ?
-  ( <FontIcon onClick={ changeRepeat } style={{ color: "rgba(0,0,0,0.3)" }} className="material-icons">repeat</FontIcon> )
+  ( <IconButton><FontIcon onClick={ changeRepeat } style={{ color: "rgba(0,0,0,0.3)" }} className="material-icons">repeat</FontIcon></IconButton> )
    : 
-  ( <FontIcon onClick={ changeRepeat } className="material-icons">{ repeatType === 1 ? "repeat_one" : "repeat" }</FontIcon> )
+  ( <IconButton><FontIcon onClick={ changeRepeat } className="material-icons">{ repeatType === 1 ? "repeat_one" : "repeat" }</FontIcon></IconButton> )
   
   return (
-    <Paper className="play-control" zDepth={5} rounded={false}>
+    <Paper className="play-control" zDepth={0} rounded={false}>
       <h3 className="song-title">{ song.name }</h3>
       <LinearProgress className="song-progress" mode="determinate" min={0} max={100} value={currentTime} />
       <div style={{ display: "flex", padding: "20px 10px" }} className="now-playing-container">
         <div style={{ width: "35%", textAlign: "center" }} className="side-icons">
           { repeatButton }
-          <FontIcon onClick={ playPrevious } className="material-icons">skip_previous</FontIcon>
+          <IconButton><FontIcon onClick={ playPrevious } className="material-icons">skip_previous</FontIcon></IconButton>
         </div>
         <div style={{ width: "30%", textAlign: "center" }} className="play-pause-button">
-          <FontIcon onClick={ toggle } style={{ fontSize: "50px", width: "50px" }} className="material-icons">{ button }</FontIcon>
+          <IconButton><FontIcon onClick={ toggle } style={{ fontSize: "50px", width: "50px" }} className="material-icons">{ button }</FontIcon></IconButton>
         </div>
         <div style={{ width: "35%", textAlign: "center" }} className="side-icons">
-          <FontIcon onClick={ playNext } className="material-icons">skip_next</FontIcon>
-          <FontIcon className="material-icons">shuffle</FontIcon>
+          <IconButton><FontIcon onClick={ playNext } className="material-icons">skip_next</FontIcon></IconButton>
+          <IconButton><FontIcon style={{ color: "rgba(0,0,0,0.3)" }} className="material-icons">shuffle</FontIcon></IconButton>
         </div>
       </div>
     </Paper>

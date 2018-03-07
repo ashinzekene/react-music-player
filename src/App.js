@@ -4,7 +4,7 @@ import { indigo400, } from 'material-ui/styles/colors'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import { connect } from 'react-redux';
-import { NOW_PLAYING_PAGE, togglePlaying, playSong, nowPlayingPage } from "./actions";
+import { NOW_PLAYING_PAGE, togglePlaying, playSong } from "./actions";
 
 import MainView from './views/MainView';
 import PlayingView from './views/PlayingView';
@@ -21,6 +21,7 @@ const mapStateToProps = state => ({
   page: state.page,
   songs: state.songs,
   playState: state.playState,
+  repeat: state.common.repeat,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -48,6 +49,13 @@ class App extends Component {
       } else {
         this.playSong(nextProps.playState.songId)
       }
+    }
+  }
+
+  componentDidMount() {
+    const { songs } = this.props
+    if (songs[0]) {
+      this.audioPlayer.src = URL.createObjectURL(songs[0])
     }
   }
 

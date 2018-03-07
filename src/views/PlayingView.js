@@ -67,7 +67,6 @@ class PlayingView extends Component {
 
 PlayingView.propTypes = {
   toggle: propTypes.func.isRequired,
-  repeat: propTypes.func.isRequired,
   songs: propTypes.array.isRequired,
   playState: propTypes.object.isRequired,
   repeat: propTypes.number.isRequired,
