@@ -10,11 +10,14 @@
 1. Controls - Next, Previous, Progress Bar ✅
 1. Saving Songs(localStroage) ✅
 1. UI ✅
-1. Shuffle
-1. Playlists
-1. Search
 1. A Page for currently playing song ✅
 1. Host on GitHub ✅
+1. Add Icons to sidebar
+1. Shuffle
+1. Repeat
+1. Playlists
+1. Seek progressbar on nowPlayingPage
+1. Search
 
 ## BUGS
 

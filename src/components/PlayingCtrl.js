@@ -20,16 +20,21 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const PlayingCtrl = props => {
-  const { playState, song, playNext, playPrevious, toggle, changeRepeat, currentTime, repeat } = props
+  const { playState, song, playNext, playPrevious, toggle, changeRepeat, currentTime, repeatType } = props
   const button = playState.playing ?  "pause_circle_filled" : "play_circle_filled"
-  const repeat_type = repeat === 0 ? "" : repeat === 1 ? "repeat" : "repeat_one"
+  console.log("repear type", repeatType)
+  const repeatButton = repeatType === 0 ?
+  ( <FontIcon onClick={ changeRepeat } style={{ color: "rgba(0,0,0,0.3)" }} className="material-icons">repeat</FontIcon> )
+   : 
+  ( <FontIcon onClick={ changeRepeat } className="material-icons">{ repeatType === 1 ? "repeat_one" : "repeat" }</FontIcon> )
+  
   return (
     <Paper className="play-control" zDepth={5} rounded={false}>
       <h3 className="song-title">{ song.name }</h3>
       <LinearProgress className="song-progress" mode="determinate" min={0} max={100} value={currentTime} />
       <div style={{ display: "flex", padding: "20px 10px" }} className="now-playing-container">
         <div style={{ width: "35%", textAlign: "center" }} className="side-icons">
-          <FontIcon onClick={ changeRepeat } className="material-icons">repeat_type</FontIcon>
+          { repeatButton }
           <FontIcon onClick={ playPrevious } className="material-icons">skip_previous</FontIcon>
         </div>
         <div style={{ width: "30%", textAlign: "center" }} className="play-pause-button">
@@ -42,6 +47,17 @@ const PlayingCtrl = props => {
       </div>
     </Paper>
   )
+}
+
+PlayingCtrl.propTypes = {
+  playState: propTypes.object.isRequired,
+  song: propTypes.object.isRequired,
+  playNext: propTypes.func.isRequired,
+  playPrevious: propTypes.func.isRequired,
+  toggle: propTypes.func.isRequired,
+  changeRepeat: propTypes.func.isRequired,
+  currentTime: propTypes.number.isRequired,
+  repeatType: propTypes.number.isRequired,  
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayingCtrl);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import propTypes from 'prop-types';
 import FontIcon from 'material-ui/FontIcon';
 
 import Header from '../components/Header';
@@ -16,7 +17,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   toggle: () => dispatch(togglePlaying()),
   playSong: id => dispatch(playSong(id)),
-  repeat: id => dispatch(repeat(id)), 
+  changeRepeat: id => dispatch(repeat(id)), 
 })
 
 
@@ -38,8 +39,8 @@ class PlayingView extends Component {
 
   repeat = () => {
     let repeat = this.props.repeat
-    let nextRepeat = repeat === 2 ? 0 : ++repeat
-    this.props.repeat(nextRepeat)
+    let nextRepeat = repeat === 2 ? 0 : repeat + 1
+    this.props.changeRepeat(nextRepeat)
   }
   
   render() {
@@ -57,11 +58,21 @@ class PlayingView extends Component {
           playNext={ this.playNext }
           playPrevious= { this.playPrevious }
           playState={ playState }
-          repeat={ repeat }
+          repeatType={ repeat }
           toggle={ this.props.toggle } />
       </div>
     )
   }
+}
+
+PlayingView.propTypes = {
+  toggle: propTypes.func.isRequired,
+  repeat: propTypes.func.isRequired,
+  songs: propTypes.array.isRequired,
+  playState: propTypes.object.isRequired,
+  repeat: propTypes.number.isRequired,
+  playSong: propTypes.func.isRequired,
+  changeRepeat: propTypes.func.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayingView);
