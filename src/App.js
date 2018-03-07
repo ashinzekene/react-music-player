@@ -74,7 +74,7 @@ class App extends Component {
       playState.songId < songs.length && this.props.playSong(playState.songId + 1)
     }
     // repeat 1
-    else if (repeat === 1) this.props.playSong(playState.id)
+    else if (repeat === 1) this.props.playSong(playState.songId)
     // repeat all
     else this.playNext()
   }

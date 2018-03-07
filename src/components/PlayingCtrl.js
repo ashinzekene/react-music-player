@@ -21,7 +21,7 @@ const PlayingCtrl = props => {
   const { playState, song, playNext, playPrevious, toggle, changeRepeat, currentTime, repeatType } = props
   const button = playState.playing ?  "pause_circle_filled" : "play_circle_filled"
   const repeatButton = repeatType === 0 ?
-  ( <IconButton><FontIcon onClick={ changeRepeat } style={{ color: "rgba(0,0,0,0.3)" }} className="material-icons">repeat</FontIcon></IconButton> )
+  ( <FontIcon onClick={ changeRepeat } style={{ color: "rgba(0, 0, 0, 0.3)" }} className="material-icons">repeat</FontIcon> )
    : 
   ( <IconButton><FontIcon onClick={ changeRepeat } className="material-icons">{ repeatType === 1 ? "repeat_one" : "repeat" }</FontIcon></IconButton> )
   
@@ -39,7 +39,7 @@ const PlayingCtrl = props => {
         </div>
         <div style={{ width: "35%", textAlign: "center" }} className="side-icons">
           <IconButton><FontIcon onClick={ playNext } className="material-icons">skip_next</FontIcon></IconButton>
-          <IconButton><FontIcon style={{ color: "rgba(0,0,0,0.3)" }} className="material-icons">shuffle</FontIcon></IconButton>
+          <FontIcon style={{ color: "rgba(0, 0, 0, 0.3)" }} className="material-icons">shuffle</FontIcon>
         </div>
       </div>
     </Paper>

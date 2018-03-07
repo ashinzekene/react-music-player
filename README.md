@@ -13,6 +13,7 @@
 1. A Page for currently playing song ✅
 1. Host on GitHub ✅
 1. Repeat ✅
+1. Let playing song show as playing
 1. Add Icons to sidebar
 1. Show Time
 1. Seek progressbar on nowPlayingPage

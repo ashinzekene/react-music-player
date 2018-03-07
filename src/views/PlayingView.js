@@ -48,7 +48,7 @@ class PlayingView extends Component {
     return (
       <div>
         <Header/>
-        <div style={{ display: "flex", justifyContent: "center", alignItems:"center" }}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems:"center", marginTop: "30px" }}>
           <FontIcon className="material-icons" style={{ width: "300px", fontSize: "300px", color: "rgba(0,0,0,0.3)" }}>album</FontIcon>
         </div>
         <PlayingCtrl
