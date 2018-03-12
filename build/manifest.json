@@ -22,8 +22,12 @@
     "src": "icons/mipmap-xxxhdpi/ic_launcher.png",
     "sizes": "192x192",
     "type": "image/png"
+  }, {
+    "src": "icons/playstore/icon.png",
+    "sizes": "512x512",
+    "type": "image/png"
   }],
-  "start_url": "./index.html",
+  "start_url": ".",
   "display": "standalone",
   "theme_color": "#7050FA",
   "background_color": "#ffffff"
