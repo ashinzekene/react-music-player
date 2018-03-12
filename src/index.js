@@ -22,7 +22,6 @@ getState().then(localState => {
       <App />
     </Provider>, document.getElementById('root'));
   
-   registerServiceWorker();
 })
-
+registerServiceWorker();
 

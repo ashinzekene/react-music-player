@@ -4,6 +4,10 @@ body {
   font-family: sans-serif;
 }
 
+.sr-only {
+  display: none !important;
+}
+
 .small-now-playing {
   background-color: white;
   z-index: 4000;
