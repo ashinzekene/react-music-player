@@ -2,7 +2,7 @@ import { PLAY_SONG, TOGGLE_PLAYING } from "../actions/index";
 
 const initalState = {
   playing: false,
-  songId: 0
+  songId: null
 }
 
 export default (state = initalState, action) => {

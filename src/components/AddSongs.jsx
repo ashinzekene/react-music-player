@@ -25,7 +25,7 @@ class AddSongs extends React.Component {
     return (
       <FloatingActionButton onClick={ this.triggerInput } backgroundColor="#7050FA" style={{position: "fixed", bottom: "100px", right: "40px", zIndex:3000}} >
         <ContentAdd />
-        <label style={{ display: "none"}} htmlFor="song-input" className="sr-ony">Pick a song</label>
+        <label htmlFor="song-input" className="sr-only">Pick a song</label>
         <input style={{ display: "none" }} id="song-input" ref={(input)=> this.fileInput = input} onChange= {this.addSong} type="file" multiple accept="audio/mp3" />
       </FloatingActionButton>
     )

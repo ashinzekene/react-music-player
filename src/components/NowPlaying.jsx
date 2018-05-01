@@ -1,14 +1,11 @@
 import React from 'react';
 import Avatar from 'material-ui/Avatar'
-// import { ListItem } from 'material-ui/List'
 import Paper from 'material-ui/Paper'
 import IconButton from 'material-ui/IconButton';
 import LinearProgress from 'material-ui/LinearProgress';
 import AvPlayCircleFilled from 'material-ui/svg-icons/av/play-circle-filled'
 import AVPauseCirleOutline from 'material-ui/svg-icons/av/pause-circle-outline'
 import ImageMusicNote from 'material-ui/svg-icons/image/music-note'
-// import AVSkipNext from 'material-ui/svg-icons/av/skip-next'
-// import AVSkipPrevious from 'material-ui/svg-icons/av/skip-previous'
 
 
 const NowPlaying = props => {
