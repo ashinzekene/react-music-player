@@ -40,19 +40,15 @@ class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.playState !== this.props.playState) {
       if (!nextProps.playState.playing) {
-        console.log("Is playing, pause")
         // PAUSE
         this.audioPlayer.pause()
       } else if (nextProps.playState.songId === null) {
-        console.log("Just initailized")
         this.playSong(0)        
       } else if (nextProps.playState.songId === this.props.playState.songId) {
         // RESUME
-        console.log("Is paused, play")
         this.audioPlayer.play()
         // Start playing
       } else {
-        console.log("Play a new song")
         this.playSong(nextProps.playState.songId)
       }
     }
@@ -100,7 +96,6 @@ class App extends Component {
   playSong = (id) => {
     const { songs } = this.props
     if (songs[id]) {
-      console.log("Song %s exists", songs[id])
       let fileSrc = URL.createObjectURL(songs[id])
       this.audioPlayer.src = fileSrc
       this.audioPlayer.play()
