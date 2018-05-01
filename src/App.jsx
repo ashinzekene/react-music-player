@@ -102,6 +102,10 @@ class App extends Component {
     }
   }
 
+  timeDrag = time => {
+    this.audioPlayer.currentTime = this.audioPlayer.duration * (time / 100) 
+  }
+
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -109,7 +113,7 @@ class App extends Component {
           <audio controls hidden onTimeUpdate={this.updateTime} onEnded={this.songEnded} ref={(audio) => this.audioPlayer = audio} />        
           {
             this.props.page === NOW_PLAYING_PAGE ?
-             <PlayingView playNext={ this.playNext } playPrevious={ this.playPrevious } currentTime={ this.state.currentTime } /> :
+             <PlayingView playNext={ this.playNext } timeDrag={ this.timeDrag } playPrevious={ this.playPrevious } currentTime={ this.state.currentTime } /> :
              <MainView playNext={ this.playNext } playPrevious={ this.playPrevious } currentTime={ this.state.currentTime }  />
           }
         </div>

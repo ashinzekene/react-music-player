@@ -54,6 +54,7 @@ class PlayingView extends Component {
         <PlayingCtrl
           currentTime= { currentTime }
           changeRepeat={ this.repeat }
+          timeDrag={ this.props.timeDrag }
           song={ songs[playState.songId] }
           playNext={ this.playNext }
           playPrevious= { this.playPrevious }
@@ -72,6 +73,8 @@ PlayingView.propTypes = {
   repeat: propTypes.number.isRequired,
   playSong: propTypes.func.isRequired,
   changeRepeat: propTypes.func.isRequired,
+  currentTime: propTypes.number.isRequired,
+  timeDrag: propTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayingView);

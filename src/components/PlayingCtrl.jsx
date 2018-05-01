@@ -6,7 +6,7 @@ import { playSong, repeat } from '../actions';
 import Paper from 'material-ui/Paper'
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
-import LinearProgress from 'material-ui/LinearProgress';
+import Slider from 'material-ui/Slider';
 
 const mapStateToProps = state => ({
 
@@ -28,7 +28,7 @@ const PlayingCtrl = props => {
   return (
     <Paper className="play-control" zDepth={0} rounded={false}>
       <h3 className="song-title">{ song.name }</h3>
-      <LinearProgress className="song-progress" mode="determinate" min={0} max={100} value={currentTime} />
+      <Slider style={{ height: "2px" }} className="song-progress" value={currentTime} onChange={ (_, newVal) => props.timeDrag(newVal) } max={100} min={0} defaultValue={2} />
       <div style={{ display: "flex", padding: "20px 10px" }} className="now-playing-container">
         <div style={{ width: "35%", textAlign: "center" }} className="side-icons">
           { repeatButton }
@@ -54,7 +54,8 @@ PlayingCtrl.propTypes = {
   toggle: propTypes.func.isRequired,
   changeRepeat: propTypes.func.isRequired,
   currentTime: propTypes.number.isRequired,
-  repeatType: propTypes.number.isRequired,  
+  repeatType: propTypes.number.isRequired,
+  timeDrag: propTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayingCtrl);
