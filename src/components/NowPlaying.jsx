@@ -30,17 +30,6 @@ const NowPlaying = props => {
           <IconButton onClick={togglePlaying} >{button}</IconButton>
         </div>
       </div>
-      {/* <ListItem
-          style={listItemStyle}
-          leftIcon={<Avatar icon={<ImageMusicNote/>}/>}
-          rightIconButton={
-            <div style={{ height: "100%" }}>
-              <IconButton onClick={this.props.playPrevious} ><AVSkipPrevious/></IconButton>
-              <IconButton onClick={this.props.togglePlaying} >{button}</IconButton>
-              <IconButton onClick={this.props.playNext} ><AVSkipNext/></IconButton>
-            </div>}
-          primaryText= { songs[playState.song] && songs[playState.song].name }
-        /> */}
     </Paper>
   )
 }

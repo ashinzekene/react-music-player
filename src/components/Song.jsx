@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import ImageMusicNote from 'material-ui/svg-icons/image/music-note';
 import FontIcon from 'material-ui/FontIcon';
 import Avatar from 'material-ui/Avatar';
-
 import { removeSong, playSong } from '../actions'
 
 const mapStateToDispatch = (dispatch) => ({
