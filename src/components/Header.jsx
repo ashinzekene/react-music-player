@@ -34,8 +34,9 @@ class Header extends Component {
       <div>
         <AppBar
           iconElementLeft={<IconButton onClick={ this.openPage() } ><NavMenuIcon /></IconButton>}
-          style={{backgroundColor: "#7050FA"}}
+          style={{backgroundColor: "#7050FA", position: "fixed"}}
           title="Music Player"  />
+        <div className="header-padding" style={{ height: "60px" }}></div>
         <Drawer docked={false} open={ open }>
           <AppBar title="Menu" showMenuIconButton={false} />
           <MenuItem onClick={ this.openPage(HOME_PAGE) }>Home</MenuItem>
