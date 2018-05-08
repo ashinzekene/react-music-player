@@ -29,7 +29,7 @@ const PlayingCtrl = props => {
     <Paper className="play-control" zDepth={0} rounded={false}>
       <h3 className="song-title">{ song.name }</h3>
       <Slider style={{ height: "2px" }} className="song-progress" value={currentTime} onChange={ (_, newVal) => props.timeDrag(newVal) } max={100} min={0} defaultValue={2} />
-      <div style={{ display: "flex", padding: "20px 10px" }} className="now-playing-container">
+      <div className="now-playing-container">
         <div style={{ width: "35%", textAlign: "center" }} className="side-icons">
           { repeatButton }
           <IconButton><FontIcon onClick={ playPrevious } className="material-icons">skip_previous</FontIcon></IconButton>
