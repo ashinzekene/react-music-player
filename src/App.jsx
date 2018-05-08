@@ -96,6 +96,7 @@ class App extends Component {
   playSong = (id) => {
     const { songs } = this.props
     if (songs[id]) {
+      window.document.title = songs[id].name.replace(".mp3", "")
       let fileSrc = URL.createObjectURL(songs[id])
       this.audioPlayer.src = fileSrc
       this.audioPlayer.play()
