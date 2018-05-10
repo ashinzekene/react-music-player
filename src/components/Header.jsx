@@ -24,8 +24,10 @@ class Header extends Component {
   }
 
   openPage = page => () => {
-    page && this.props.openPage(page)
     this.setState(prevState => ({ open: !prevState.open }))
+    // Don't Open now playing page when there is no song 
+    if (!this.props.playState) return
+    page && this.props.openPage(page)
   }
 
   render() {
@@ -50,7 +52,8 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  openPage: propTypes.func.isRequired  
+  openPage: propTypes.func.isRequired,
+  playingSong: propTypes.object
 }
 
 export default connect(null, mapDispatchToProps)(Header); 

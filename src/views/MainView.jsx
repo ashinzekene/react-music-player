@@ -23,7 +23,9 @@ class MainView extends Component {
     let { songs, playState, openNowPlaying, currentTime } = this.props
     return (
       <div>
-        <Header />
+        <Header 
+          playingSong={songs[playState.songId]}
+        />
         <SongList songs={songs} />
         <AddSongs />
         <NowPlaying
