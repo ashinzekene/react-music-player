@@ -20,15 +20,17 @@ const mapDispatchToProps = dispatch => ({
 
 class MainView extends Component {
   render() {
-    let { songs, playState, openNowPlaying, currentTime } = this.props
+    let { songs, playState, openNowPlaying, openSnackbar, currentTime } = this.props
     return (
       <div>
         <Header 
+          openSnackbar={openSnackbar}
           playingSong={songs[playState.songId]}
-        />
-        <SongList songs={songs} />
+          />
+        <SongList openSnackbar={openSnackbar} songs={songs} />
         <AddSongs />
         <NowPlaying
+          openSnackbar={openSnackbar}
           togglePlaying={this.props.toggle}
           playState={playState}
           playingSong={songs[playState.songId]}
@@ -44,7 +46,8 @@ MainView.propTypes = {
   toggle: propTypes.func.isRequired,
   songs: propTypes.array.isRequired,
   playState: propTypes.object.isRequired,
-  currentTime: propTypes.number.isRequired
+  currentTime: propTypes.number.isRequired,
+  openSnackbar: propTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainView)

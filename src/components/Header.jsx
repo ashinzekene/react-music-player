@@ -8,7 +8,7 @@ import IconButton from 'material-ui/IconButton/IconButton';
 import NavMenuIcon from 'material-ui/svg-icons/navigation/menu';
 
 import { connect } from 'react-redux'
-import { HOME_PAGE, SETTINGS_PAGE, NOW_PLAYING_PAGE } from '../actions'
+import { HOME_PAGE, SETTINGS_PAGE, NOW_PLAYING_PAGE, PLAYLIST_PAGE } from '../actions'
 
 const mapDispatchToProps = dispatch => ({
   openPage: (type) => dispatch({ type })
@@ -19,13 +19,17 @@ class Header extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: false
+      open: false,
     }
   }
 
   openPage = page => () => {
     this.setState(prevState => ({ open: !prevState.open }))
     // Don't Open now playing page when there is no song 
+    if (page === PLAYLIST_PAGE || page === SETTINGS_PAGE) {
+      this.props.openSnackbar()
+      return
+    }
     if (!this.props.playState) return
     page && this.props.openPage(page)
   }
@@ -43,7 +47,7 @@ class Header extends Component {
           <AppBar title="Menu" showMenuIconButton={false} />
           <MenuItem onClick={ this.openPage(HOME_PAGE) }>Home</MenuItem>
           <MenuItem onClick={ this.openPage(NOW_PLAYING_PAGE) }>NowPlaying</MenuItem>
-          <MenuItem onClick={ this.openPage() }>Playlists</MenuItem>
+          <MenuItem onClick={ this.openPage(PLAYLIST_PAGE) }>Playlists</MenuItem>
           <MenuItem onClick={ this.openPage(SETTINGS_PAGE) }>Settings</MenuItem>
         </Drawer>
       </div>
@@ -53,7 +57,8 @@ class Header extends Component {
 
 Header.propTypes = {
   openPage: propTypes.func.isRequired,
-  playingSong: propTypes.object
+  playingSong: propTypes.object,
+  openSnackbar: propTypes.func.isRequired
 }
 
 export default connect(null, mapDispatchToProps)(Header); 

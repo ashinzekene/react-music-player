@@ -26,7 +26,7 @@ class Song extends Component {
   menuOptions = () => (
     <div>
       <MenuItem onClick={ this.removeSong } primaryText="RemoveSong" />
-      <MenuItem primaryText="Add to Playlist" />
+      <MenuItem onClick={ this.props.openSnackbar } primaryText="Add to Playlist" />
     </div>
   )
 

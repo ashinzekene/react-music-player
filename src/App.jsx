@@ -6,6 +6,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import { connect } from 'react-redux';
 import { NOW_PLAYING_PAGE, togglePlaying, playSong } from "./actions";
 
+import Snackbar from 'material-ui/Snackbar';
 import MainView from './views/MainView';
 import PlayingView from './views/PlayingView';
 
@@ -33,7 +34,8 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentTime: 0
+      currentTime: 0,
+      snackBarOpen: false,      
     }
   }
   
@@ -108,6 +110,14 @@ class App extends Component {
     this.audioPlayer.currentTime = this.audioPlayer.duration * (time / 100)
   }
 
+  handleActionClick = () => {
+    window.open("https://github.com/ashinzekene/react-music-player", "_blank")
+  }
+
+  handleRequestClose = () => {
+    this.setState({ snackBarOpen: false })
+  }
+
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -122,11 +132,21 @@ class App extends Component {
               currentTime={ this.state.currentTime }
               playingSong={this.props.songs[this.props.playState.songId]}
               repeatType={this.props.repeatType}
+              openSnackbar={ () => this.setState({ snackBarOpen: true }) }
             /> :
             <MainView
               currentTime={ this.state.currentTime }
+              openSnackbar={ () => this.setState({ snackBarOpen: true }) }
             />
           }
+           <Snackbar
+            open={this.state.snackBarOpen}
+            message="Not Implemented yet, You can make a PR"
+            action="make a PR"
+            autoHideDuration={4000}
+            onRequestClose={this.handleRequestClose}
+            onActionClick={this.handleActionClick}
+          />
         </div>
       </MuiThemeProvider>
     )

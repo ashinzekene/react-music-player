@@ -10,7 +10,7 @@ body {
 
 .small-now-playing {
   background-color: white;
-  z-index: 4000;
+  z-index: 500;
   position: fixed;
   bottom: 0px;
   left: 0px;

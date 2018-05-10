@@ -45,7 +45,7 @@ class PlayingCtrl extends Component {
           </div>
           <div style={{ width: "35%", textAlign: "center" }} className="side-icons">
             <IconButton><FontIcon onClick={ playNext } className="material-icons">skip_next</FontIcon></IconButton>
-            <FontIcon style={{ color: "rgba(0, 0, 0, 0.3)" }} className="material-icons">shuffle</FontIcon>
+            <FontIcon onClick={ this.props.openSnackbar } style={{ color: "rgba(0, 0, 0, 0.3)" }} className="material-icons">shuffle</FontIcon>
           </div>
         </div>
       </Paper>
@@ -63,6 +63,7 @@ PlayingCtrl.propTypes = {
   playState: propTypes.object.isRequired,
   changeRepeat: propTypes.func.isRequired,
   togglePlaying: propTypes.func.isRequired,
+  openSnackbar: propTypes.func.isRequired  
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayingCtrl);

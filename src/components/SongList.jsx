@@ -16,7 +16,7 @@ const SongList = (props) => {
         {
           props.songs.map((song, ind) => (
             <div key={"div"+ind}>
-              <Song key={ind} song= { song } index= {ind} />
+              <Song openSnackbar={props.openSnackbar} key={ind} song= { song } index= {ind} />
               <Divider key={song.lastModified}/> 
             </div>
           ))
