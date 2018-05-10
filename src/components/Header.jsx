@@ -30,7 +30,7 @@ class Header extends Component {
       this.props.openSnackbar()
       return
     }
-    if (!this.props.playState) return
+    if (!this.props.playState && page === NOW_PLAYING_PAGE) return
     page && this.props.openPage(page)
   }
 
