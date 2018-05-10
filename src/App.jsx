@@ -21,7 +21,7 @@ const mapStateToProps = state => ({
   page: state.page,
   songs: state.songs,
   playState: state.playState,
-  repeat: state.common.repeat,
+  repeatType: state.common.repeat,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -69,14 +69,14 @@ class App extends Component {
   }
 
   songEnded = () => {
-    const { songs, playState, repeat } = this.props
+    const { songs, playState, repeatType } = this.props
     // No repeat
-    if (repeat === 0) {
+    if (repeatType === 0) {
       URL.revokeObjectURL(songs[playState.songId])
       playState.songId < songs.length && this.props.playSong(playState.songId + 1)
     }
     // repeat 1
-    else if (repeat === 1) this.props.playSong(playState.songId)
+    else if (repeatType === 1) this.props.playSong(playState.songId)
     // repeat all
     else this.playNext()
   }
@@ -84,7 +84,8 @@ class App extends Component {
   playPrevious = () => {
     const { songs, playState } = this.props
     URL.revokeObjectURL(songs[playState.songId])
-    let nextSongId = playState.songId === 0 ? songs.length - 1 : playState.songId + 1//(playState.songId + ((songs.length - 1)) % songs.length
+    let nextSongId = playState.songId === 0 ? songs.length - 1 : playState.songId - 1
+    console.log("Next song", nextSongId)
     this.props.playSong(nextSongId)
   }
 
@@ -96,15 +97,15 @@ class App extends Component {
   playSong = (id) => {
     const { songs } = this.props
     if (songs[id]) {
-      window.document.title = songs[id].name.replace(".mp3", "")
       let fileSrc = URL.createObjectURL(songs[id])
       this.audioPlayer.src = fileSrc
       this.audioPlayer.play()
+      window.document.title = songs[id].name.replace(".mp3", "")
     }
   }
 
   timeDrag = time => {
-    this.audioPlayer.currentTime = this.audioPlayer.duration * (time / 100) 
+    this.audioPlayer.currentTime = this.audioPlayer.duration * (time / 100)
   }
 
   render() {
@@ -114,8 +115,17 @@ class App extends Component {
           <audio controls hidden onTimeUpdate={this.updateTime} onEnded={this.songEnded} ref={(audio) => this.audioPlayer = audio} />        
           {
             this.props.page === NOW_PLAYING_PAGE ?
-             <PlayingView playNext={ this.playNext } timeDrag={ this.timeDrag } playPrevious={ this.playPrevious } currentTime={ this.state.currentTime } /> :
-             <MainView playNext={ this.playNext } playPrevious={ this.playPrevious } currentTime={ this.state.currentTime }  />
+            <PlayingView
+              playNext={ this.playNext }
+              timeDrag={ this.timeDrag }
+              playPrevious={ this.playPrevious }
+              currentTime={ this.state.currentTime }
+              playingSong={this.props.songs[this.props.playState.songId]}
+              repeatType={this.props.repeatType}
+            /> :
+            <MainView
+              currentTime={ this.state.currentTime }
+            />
           }
         </div>
       </MuiThemeProvider>
