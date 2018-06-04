@@ -45,18 +45,13 @@ class App extends Component {
       if (!nextProps.playState.playing) {
         // PAUSE
         this.audioPlayer.pause()
-      } else if (nextProps.playState.songId === null) {
-        console.log("1. Not here!!!")
-        this.playSong(0)        
-      } else if (nextProps.playState.songId === 0)  {
+      }else if (nextProps.playState.songId === 0)  {
         this.playSong(0)
       } else if (nextProps.playState.songId === this.props.playState.songId) {
         // RESUME
-        console.log("2. Not here!!!")
         this.audioPlayer.play()
         // Start playing
       } else {
-        console.log("Should be here!!!")
         this.playSong(nextProps.playState.songId)
       }
     }
