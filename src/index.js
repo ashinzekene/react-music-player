@@ -11,7 +11,12 @@ import { saveState, getState } from './store/localStore'
 // import createStoreObserver from  'redux-store-observer'
 
 getState().then(localState => {
-  const store = createStore(reducers, localState, applyMiddleware(loggerMiddleware))
+  let store
+  if (process.env.NODE_ENV === "development") {
+    store = createStore(reducers, localState, applyMiddleware(loggerMiddleware))
+  } else {
+    store = createStore(reducers, localState)
+  }
   store.subscribe(() => {
     saveState({
       songs: store.getState().songs

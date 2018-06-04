@@ -1,6 +1,5 @@
 import React from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 import { addSongs } from '../actions'
 import { connect } from 'react-redux';
 
@@ -24,7 +23,7 @@ class AddSongs extends React.Component {
   render() {
     return (
       <FloatingActionButton onClick={ this.triggerInput } backgroundColor="#7050FA" style={{position: "fixed", bottom: "120px", right: "25px", zIndex:3000}} >
-        <ContentAdd />
+        <span style={{ color: "white", fontSize: "30px", fontWeight: 200 }}>+</span>
         <label htmlFor="song-input" className="sr-only">Pick a song</label>
         <input style={{ display: "none" }} id="song-input" ref={(input)=> this.fileInput = input} onChange= {this.addSong} type="file" multiple accept="audio/mp3" />
       </FloatingActionButton>

@@ -41,7 +41,6 @@ class App extends Component {
   
   componentWillReceiveProps(nextProps) {
     if (nextProps.playState !== this.props.playState) {
-      console.log("Changed playstate", this.props.playState, nextProps.playState)
       if (!nextProps.playState.playing) {
         // PAUSE
         this.audioPlayer.pause()
@@ -88,7 +87,6 @@ class App extends Component {
     const { songs, playState } = this.props
     URL.revokeObjectURL(songs[playState.songId])
     let nextSongId = playState.songId === 0 ? songs.length - 1 : playState.songId - 1
-    console.log("Next song", nextSongId)
     this.props.playSong(nextSongId)
   }
 
@@ -99,7 +97,6 @@ class App extends Component {
 
   playSong = (id) => {
     const { songs } = this.props
-    console.log("play", id, songs)
     if (songs[id]) {
       let fileSrc = URL.createObjectURL(songs[id])
       this.audioPlayer.src = fileSrc

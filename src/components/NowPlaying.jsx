@@ -5,8 +5,6 @@ import Paper from 'material-ui/Paper'
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import LinearProgress from 'material-ui/LinearProgress';
-import AvPlayCircleFilled from 'material-ui/svg-icons/av/play-circle-filled'
-import AVPauseCirleOutline from 'material-ui/svg-icons/av/pause-circle-outline'
 import ImageMusicNote from 'material-ui/svg-icons/image/music-note'
 
 
@@ -22,7 +20,7 @@ const NowPlaying = props => {
             <Avatar icon={<ImageMusicNote />} />
           </div>
           <div style={{ display: "inline-block", width: "77%" }} className="song-title">
-            {playingSong && playingSong.name}
+            {playingSong ? playingSong.name : "[No song]"}
           </div>
         </div>
         <div style={{ width: "50px" }} className="play-pause-button">
@@ -37,7 +35,7 @@ const NowPlaying = props => {
 
 NowPlaying.propTypes = {
   playState: propTypes.object.isRequired,
-  playingSong: propTypes.object.isRequired,
+  playingSong: propTypes.object,
   currentTime: propTypes.number.isRequired,
   togglePlaying: propTypes.func.isRequired,
   openNowPlaying: propTypes.func.isRequired,
