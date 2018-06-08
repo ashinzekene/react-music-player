@@ -26,6 +26,8 @@ Feel free to contribute to the repo. Make sure you configure eslint, or run lint
 1. Let playing song show as playing
 1. Add Icons to sidebar
 1. Show Time
+1. Use the MediaAPI
+1. 
 1. Fix linting
 1. Shuffle
 1. Search
