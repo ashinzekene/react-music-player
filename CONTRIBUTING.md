@@ -4,18 +4,16 @@ We would love for you to contribute and help make it even better
 than it is today! As a contributor, here are the guidelines we would like you
 to follow:
 
--[Code of Conduct](#coc)
-  - [Issues and Bugs](#issue)
-  - [Feature Requests](#feature)
-  - [Submission Guidelines](#submit)
+- [ESLint](#eslint)
+- [Issues and Bugs](#issue)
+- [Feature Requests](#feature)
+- [Submission Guidelines](#submit)
 
-## <a name="coc" > </a> Code of Conduct
-Help us keep this project open and inclusive.Please read and follow our [Code of Conduct](code_of_conduct /).
+## <a name="eslint" > </a> ESLint
+This project uses ESLint, please make sure all files pass linting before making pull request. Do not edit the ESLint configuration file
 
 ## <a name="issue" > </a> Found an Issue?
-If you find a bug in the source code or a mistake in the documentation, you can help us by
-[submitting an issue](#submit - issue) to our [GitHub Repository](https://github.com/ashinzekene/react-music-player). Even better, you can
-  [submit a Pull Request](#submit-pr) with a fix.
+If you find a bug in the source code or a mistake in the documentation, you can help us by [submitting an issue](#submit-issue) to our [GitHub Repository](https://github.com/ashinzekene/react-music-player). Even better, you can [submit a Pull Request](#submit-pr) with a fix.
 
 ## <a name="feature" > </a> Want a Feature?
 You can * request * a new feature by [submitting an issue](#submit - issue) to our [GitHub
@@ -48,7 +46,7 @@ You can file new issues by providing the above information [here](https://github
   ### <a name="submit-pr" > </a> Submitting a Pull Request (PR)
 Before you submit your Pull Request (PR) consider the following guidelines:
 
-* Search[GitHub](https://github.com/ashinzekene/react-music-player/pulls) for an open or closed PR
+* Search [GitHub](https://github.com/ashinzekene/react-music-player/pulls) for an open or closed PR
     that relates to your submission.You don't want to duplicate effort.
 
     * Make your changes in a new git fork:
