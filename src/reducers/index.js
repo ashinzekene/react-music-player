@@ -1,14 +1,14 @@
-import { combineReducers } from 'redux'
-import songs from './songs'
-import playState from './playState'
-import common from './common'
-import page from './page'
+import { combineReducers } from 'redux';
+import songs from './songs';
+import playState from './playState';
+import common from './common';
+import page from './page';
 
 const reducers = combineReducers({
   songs,
   common,
   playState,
-  page
-})
+  page,
+});
 
-export default reducers
+export default reducers;
