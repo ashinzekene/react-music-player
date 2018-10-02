@@ -6,7 +6,7 @@ import AddSongs from '../components/AddSongs';
 import Header from '../components/Header'
 import SongList from '../components/SongList'
 import NowPlaying from '../components/NowPlaying'
-import { togglePlaying, nowPlayingPage } from "../actions";
+import { togglePlaying, nowPlayingPage, addSongs } from "../actions";
 
 const mapStateToProps = state => ({
   songs: state.songs,
@@ -15,14 +15,34 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   toggle: () => dispatch(togglePlaying()),
-  openNowPlaying: () => dispatch(nowPlayingPage())
+  openNowPlaying: () => dispatch(nowPlayingPage()),
+  addSongs: (songs) => dispatch(addSongs(songs))
 })
 
 class MainView extends Component {
+  handleDragOver = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    event.dataTransfer.dropEffect = 'copy';
+  };
+
   render() {
     let { songs, playState, openNowPlaying, openSnackbar, currentTime } = this.props
     return (
-      <div>
+      <div
+        style={{height: "100%"}}
+        onDragOver={this.handleDragOver}
+        onDrop={event => {
+          this.handleDragOver(event);
+          if (window.File && window.FileReader && window.FileList && window.Blob) {
+            var files = [...event.dataTransfer.files];
+            files = files.filter(file => file.name && file.name.endsWith(".mp3"));
+            files.length > 0 && this.props.addSongs(files);
+          } else {
+            console.log('The File APIs are not fully supported in this browser.');
+          }
+          return false;          
+        }}>
         <Header 
           openSnackbar={openSnackbar}
           playingSong={songs[playState.songId]}

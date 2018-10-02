@@ -120,7 +120,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div>
+        <div style={{height: "100%"}}>
           <audio controls hidden onTimeUpdate={this.updateTime} onEnded={this.songEnded} ref={(audio) => this.audioPlayer = audio} />        
           {
             this.props.page === NOW_PLAYING_PAGE ?
