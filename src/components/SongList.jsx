@@ -7,9 +7,7 @@ import Song from './Song'
 const SongList = (props) => {
   if (!props.songs[0]) {
     return (
-      <div style={{marginBottom: "100px"}}>
-        <h4 style={{fontWeight: 300, textAlign: "center" }}>No Songs Present. Please Add Songs</h4>
-      </div>
+      <h4 style={{fontWeight: 300, textAlign: "center" }}>No Songs Present. Please Add Songs</h4>
     )
   }
   return (
