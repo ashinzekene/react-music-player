@@ -9,6 +9,7 @@ import { NOW_PLAYING_PAGE, togglePlaying, playSong } from "./actions";
 import Snackbar from 'material-ui/Snackbar';
 import MainView from './views/MainView';
 import PlayingView from './views/PlayingView';
+import keyboardEvents from './utils/keyboardEvents';
 
 injectTapEventPlugin()
 
@@ -37,6 +38,7 @@ class App extends Component {
       currentTime: 0,
       snackBarOpen: false,      
     }
+    this.releaseKeyboardEvents = null;
   }
   
   componentWillReceiveProps(nextProps) {
@@ -61,6 +63,15 @@ class App extends Component {
     if (songs[0]) {
       this.audioPlayer.src = URL.createObjectURL(songs[0])
     }
+    this.releaseKeyboardEvents = keyboardEvents({
+      playNext: this.playNext,
+      playPrevious: this.playPrevious,
+      togglePlaying: this.props.toggle
+    });
+  }
+
+  componentWillUnmount() {
+    this.releaseKeyboardEvents();
   }
 
   playNext = () => {
