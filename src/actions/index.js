@@ -26,7 +26,7 @@ export const playSong = id => ({
   id,
 });
 
-export const repeat = id => ({
+export const repeatType = id => ({
   type: REPEAT,
   id,
 });

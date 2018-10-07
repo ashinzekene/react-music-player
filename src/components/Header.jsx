@@ -26,14 +26,15 @@ class Header extends Component {
   }
 
   openPage = page => () => {
+    const { openPage, playState, openSnackbar } = this.props;
     this.setState(prevState => ({ open: !prevState.open }));
     // Don't Open now playing page when there is no song
     if (page === PLAYLIST_PAGE || page === SETTINGS_PAGE) {
-      this.props.openSnackbar();
+      openSnackbar();
       return;
     }
-    if (!this.props.playState && page === NOW_PLAYING_PAGE) return;
-    page && this.props.openPage(page);
+    if (!playState && page === NOW_PLAYING_PAGE) return;
+    if (page) openPage(page);
   }
 
   render() {
@@ -60,7 +61,7 @@ class Header extends Component {
 
 Header.propTypes = {
   openPage: propTypes.func.isRequired,
-  playingSong: propTypes.object,
+  playState: propTypes.objectOf(propTypes.any).isRequired,
   openSnackbar: propTypes.func.isRequired,
 };
 

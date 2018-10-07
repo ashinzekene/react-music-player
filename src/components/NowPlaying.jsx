@@ -17,7 +17,8 @@ const NowPlaying = (props) => {
     <Paper className="small-now-playing" zDepth={5} rounded={false}>
       <LinearProgress className="song-progress" mode="determinate" min={0} max={100} value={currentTime} />
       <div style={{ display: 'flex', padding: '20px 10px' }} className="now-playing-container">
-        <div style={{ width: '90%' }} onClick={playingSong && openNowPlaying}>
+        {/* eslint-disable-next-line */}
+        <div style={{ width: '90%' }} role="button" tabIndex="0" onClick={playingSong && openNowPlaying}>
           <div style={{ width: '15%', display: 'inline-block' }}>
             <Avatar icon={<ImageMusicNote />} />
           </div>
@@ -36,8 +37,8 @@ const NowPlaying = (props) => {
 };
 
 NowPlaying.propTypes = {
-  playState: propTypes.object.isRequired,
-  playingSong: propTypes.object,
+  playState: propTypes.objectOf(propTypes.any).isRequired,
+  playingSong: propTypes.objectOf(propTypes.any).isRequired,
   currentTime: propTypes.number.isRequired,
   togglePlaying: propTypes.func.isRequired,
   openNowPlaying: propTypes.func.isRequired,
