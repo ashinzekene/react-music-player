@@ -4,8 +4,8 @@
 
  [CHECK OUT THE WEB APP](https://ashinzekene.github.io/react-music-player)
 
-  ![React-music-player-1](image-1.jpg)
-  ![React-music-player-1](image-2.jpg)
+  ![React-music-player-1](image-1.jpg | width=250)
+  ![React-music-player-1](image-2.jpg | width=250)
 
 ## CONTRIBUTING
 
