@@ -49,7 +49,6 @@ class App extends Component {
     }
   }
 
-
   componentWillReceiveProps(nextProps) {
     const { playState } = this.props;
     if (nextProps.playState !== playState) {
@@ -83,9 +82,11 @@ class App extends Component {
     if (repeatType === 0) {
       URL.revokeObjectURL(songs[playState.songId]);
       if (playState.songId < songs.length) play(playState.songId + 1);
-    } else if (repeatType === 1) playSong(playState.songId);
+    } else if (repeatType === 1) {
+      // repeat one
+      play(playState.songId);
     // repeat all
-    else this.playNext();
+    } else this.playNext();
   }
 
   playPrevious = () => {
@@ -131,14 +132,15 @@ class App extends Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
           <Header
-            openSnackbar={() => this.setState({ snackBarOpen: true })}
+            playState={playState}
             playingSong={songs[playState.songId]}
+            openSnackbar={() => this.setState({ snackBarOpen: true })}
           />
           <audio
-            controls
             hidden
-            onTimeUpdate={this.updateTime}
+            controls
             onEnded={this.songEnded}
+            onTimeUpdate={this.updateTime}
             ref={(audio) => { this.audioPlayer = audio; }}
           >
             <track kind="captions" {...{}} />
@@ -146,28 +148,29 @@ class App extends Component {
           {
             page === NOW_PLAYING_PAGE ? (
               <PlayingView
+                repeatType={repeatType}
                 playNext={this.playNext}
                 timeDrag={this.timeDrag}
-                playPrevious={this.playPrevious}
                 currentTime={currentTime}
+                playPrevious={this.playPrevious}
                 playingSong={songs[playState.songId]}
-                repeatType={repeatType}
               />) : (
                 <MainView
                   songs={songs}
-                  playState={playState}
-                  openNowPlaying={openNowPlaying}
-                  currentTime={currentTime}
                   toggle={toggle}
+                  playState={playState}
+                  currentTime={currentTime}
+                  openNowPlaying={openNowPlaying}
+                  openSnackbar={() => this.setState({ snackBarOpen: true })}
                 />)
           }
           <Snackbar
             open={snackBarOpen}
-            message="Not Implemented yet, You can make a PR"
-            action="make a PR"
+            action="make a PR 😊"
             autoHideDuration={4000}
-            onRequestClose={this.handleRequestClose}
             onActionClick={this.handleActionClick}
+            onRequestClose={this.handleRequestClose}
+            message="Not Implemented yet, You can make a PR"
           />
         </div>
       </MuiThemeProvider>

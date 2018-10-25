@@ -1,17 +1,16 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import FontIcon from 'material-ui/FontIcon';
-// import Header from '../components/Header';
 import PlayingCtrl from '../components/PlayingCtrl';
 
 const PlayingView = ({
-  currentTime,
+  playNext,
   timeDrag,
+  repeatType,
+  currentTime,
   playingSong,
   openSnackbar,
-  playNext,
   playPrevious,
-  repeatType,
 }) => (
   <div>
     <div style={{
@@ -21,25 +20,25 @@ const PlayingView = ({
       <FontIcon className="material-icons" style={{ width: '300px', fontSize: '300px', color: 'rgba(0,0,0,0.3)' }}>album</FontIcon>
     </div>
     <PlayingCtrl
-      currentTime={currentTime}
-      timeDrag={timeDrag}
       song={playingSong}
-      openSnackbar={openSnackbar}
       playNext={playNext}
-      playPrevious={playPrevious}
+      timeDrag={timeDrag}
       repeatType={repeatType}
+      currentTime={currentTime}
+      openSnackbar={openSnackbar}
+      playPrevious={playPrevious}
     />
   </div>
 );
 
 PlayingView.propTypes = {
-  playNext: propTypes.func.isRequired,
   timeDrag: propTypes.func.isRequired,
+  playNext: propTypes.func.isRequired,
+  repeatType: propTypes.number.isRequired,
+  openSnackbar: propTypes.func.isRequired,
   playPrevious: propTypes.func.isRequired,
   currentTime: propTypes.number.isRequired,
   playingSong: propTypes.objectOf(propTypes.any).isRequired,
-  repeatType: propTypes.number.isRequired,
-  openSnackbar: propTypes.func.isRequired,
 };
 
 export default PlayingView;

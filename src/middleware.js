@@ -1,9 +1,8 @@
 export default store => next => (action) => {
-  console.group('PREVIOUS STATE', store.getState());
-  console.groupCollapsed('ACTION', action);
+  console.group(action.type,);
+  console.info('PREVIOUS STATE', store.getState());
+  const result = next(action);
+  console.log('ACTION', action);
+  console.log('NEXT STATE', store.getState());
   console.groupEnd();
-  console.group('NEXT STATE', store.getState());
-  console.groupEnd();
-  console.groupEnd();
-  next(action);
 };

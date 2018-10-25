@@ -7,11 +7,6 @@ import SongList from '../components/SongList';
 import NowPlaying from '../components/NowPlaying';
 import { togglePlaying, nowPlayingPage } from '../actions';
 
-const mapStateToProps = state => ({
-  songs: state.songs,
-  playState: state.playState,
-});
-
 const mapDispatchToProps = dispatch => ({
   toggle: () => dispatch(togglePlaying()),
   openNowPlaying: () => dispatch(nowPlayingPage()),
@@ -42,4 +37,4 @@ MainView.propTypes = {
   openSnackbar: propTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainView);
+export default connect(null, mapDispatchToProps)(MainView);
