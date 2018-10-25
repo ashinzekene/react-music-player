@@ -166,6 +166,7 @@ class App extends Component {
                 currentTime={currentTime}
                 playPrevious={this.playPrevious}
                 playingSong={songs[playState.songId]}
+                openSnackbar={msg => this.setState({ snackBarOpen: true, snackMsg: msg })}
               />) : (
                 <MainView
                   songs={songs}

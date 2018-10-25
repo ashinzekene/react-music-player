@@ -48,7 +48,13 @@ class PlayingCtrl extends Component {
           </div>
           <div style={{ width: '35%', textAlign: 'center' }} className="side-icons">
             <IconButton><FontIcon onClick={playNext} className="material-icons">skip_next</FontIcon></IconButton>
-            <FontIcon onClick={openSnackbar} style={{ color: 'rgba(0, 0, 0, 0.3)' }} className="material-icons">shuffle</FontIcon>
+            <FontIcon
+              className="material-icons"
+              style={{ color: 'rgba(0, 0, 0, 0.3)' }}
+              onClick={() => openSnackbar('Shuffle doesn\'t work yet, You can make a PR 😊')}
+            >
+              shuffle
+            </FontIcon>
           </div>
         </div>
       </Paper>
