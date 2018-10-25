@@ -18,6 +18,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class PlayingCtrl extends Component {
+  componentDidMount() {
+    const { installEvent } = this.props;
+    setTimeout(() => typeof installEvent === 'function' && installEvent(), 3000);
+  }
+
   changeRepeat = () => {
     const { repeatType: repeat, changeRepeat } = this.props;
     const nextRepeat = repeat === 2 ? 0 : repeat + 1;
@@ -63,16 +68,17 @@ class PlayingCtrl extends Component {
 }
 
 PlayingCtrl.propTypes = {
-  currentTime: propTypes.number.isRequired,
   timeDrag: propTypes.func.isRequired,
-  song: propTypes.objectOf(propTypes.any).isRequired,
   playNext: propTypes.func.isRequired,
   playPrevious: propTypes.func.isRequired,
-  repeatType: propTypes.number.isRequired,
-  playState: propTypes.objectOf(propTypes.any).isRequired,
-  changeRepeat: propTypes.func.isRequired,
-  togglePlaying: propTypes.func.isRequired,
   openSnackbar: propTypes.func.isRequired,
+  repeatType: propTypes.number.isRequired,
+  changeRepeat: propTypes.func.isRequired,
+  currentTime: propTypes.number.isRequired,
+  togglePlaying: propTypes.func.isRequired,
+  song: propTypes.objectOf(propTypes.any).isRequired,
+  playState: propTypes.objectOf(propTypes.any).isRequired,
+  installEvent: propTypes.oneOf([propTypes.func.isRequired, propTypes.any]).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayingCtrl);

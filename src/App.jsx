@@ -41,6 +41,8 @@ class App extends Component {
       currentTime: 0,
       snackBarOpen: false,
       snackMsg: '',
+      installEvent: null,
+      addToHomeScreenUIVisible: false,
     };
   }
 
@@ -53,6 +55,13 @@ class App extends Component {
       playNext: this.playNext,
       playPrevious: this.playPrevious,
       togglePlaying: toggle,
+    });
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent Chrome 67 and earlier from automatically showing the prompt
+      e.preventDefault();
+      console.log('event prompt');
+      // Stash the event so it can be triggered later.
+      this.setState({ installEvent: e, addToHomeScreenUIVisible: true });
     });
   }
 
@@ -136,7 +145,9 @@ class App extends Component {
   }
 
   render() {
-    const { currentTime, snackBarOpen, snackMsg } = this.state;
+    const {
+      currentTime, snackBarOpen, snackMsg, installEvent, addToHomeScreenUIVisible,
+    } = this.state;
     const {
       songs, playState, openNowPlaying, toggle, repeatType, page,
     } = this.props;
@@ -145,6 +156,7 @@ class App extends Component {
         <div>
           <Header
             playState={playState}
+            addToHomeScreenUIVisible={addToHomeScreenUIVisible}
             playingSong={songs[playState.songId]}
             openSnackbar={() => this.setState({ snackBarOpen: true })}
           />
@@ -163,6 +175,7 @@ class App extends Component {
                 repeatType={repeatType}
                 playNext={this.playNext}
                 timeDrag={this.timeDrag}
+                installEvent={installEvent}
                 currentTime={currentTime}
                 playPrevious={this.playPrevious}
                 playingSong={songs[playState.songId]}

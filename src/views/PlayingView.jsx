@@ -11,6 +11,7 @@ const PlayingView = ({
   playingSong,
   openSnackbar,
   playPrevious,
+  installEvent,
 }) => (
   <div>
     <div style={{
@@ -24,6 +25,7 @@ const PlayingView = ({
       playNext={playNext}
       timeDrag={timeDrag}
       repeatType={repeatType}
+      installEvent={installEvent}
       currentTime={currentTime}
       openSnackbar={openSnackbar}
       playPrevious={playPrevious}
@@ -37,6 +39,7 @@ PlayingView.propTypes = {
   repeatType: propTypes.number.isRequired,
   openSnackbar: propTypes.func.isRequired,
   playPrevious: propTypes.func.isRequired,
+  installEvent: propTypes.oneOf([propTypes.func.isRequired, propTypes.any]).isRequired,
   currentTime: propTypes.number.isRequired,
   playingSong: propTypes.objectOf(propTypes.any).isRequired,
 };

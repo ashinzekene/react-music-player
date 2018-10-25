@@ -4,4 +4,7 @@ module.exports = {
   "env": {
     "browser": true,
   },
+  "rules": {
+    "react-app/jsx-a11y/href-no-hash": "off"
+  }
 };

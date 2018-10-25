@@ -1,10 +1,11 @@
 # MUSIC PLAYER
 
- A simple react music player that plays local files using the Files API 
+ A react music player PWA that plays local files using the Files API
 
  [CHECK OUT THE WEB APP](https://ashinzekene.github.io/react-music-player)
 
-  ![React-music-player](image.png)
+  ![React-music-player-1](image-1.jpg)
+  ![React-music-player-1](image-2.jpg)
 
 ## CONTRIBUTING
 
@@ -12,6 +13,13 @@ Feel free to contribute to the repo. Make sure you configure eslint, or run lint
 ### TECH STACK
 - React
 - Redux
+
+## Features
+1. Play/Pause
+1. Repeat Options
+1. Progress Bar
+1. Drag and Drop - Thanks to @CliffReimers
+1. Keyborad Controls - Thanks to @Spring3
 
 ## TODO LIST
 
