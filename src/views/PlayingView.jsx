@@ -1,37 +1,44 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import FontIcon from 'material-ui/FontIcon';
-import Header from '../components/Header';
 import PlayingCtrl from '../components/PlayingCtrl';
 
-const PlayingView = props => {
-  return (
-    <div>
-      <Header openSnackbar={props.openSnackbar}/>
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "30px" }}>
-        <FontIcon className="material-icons" style={{ width: "300px", fontSize: "300px", color: "rgba(0,0,0,0.3)" }}>album</FontIcon>
-      </div>
-      <PlayingCtrl
-        currentTime={props.currentTime}
-        timeDrag={props.timeDrag}
-        song={props.playingSong}
-        openSnackbar={props.openSnackbar}
-        playNext={props.playNext}
-        playPrevious={props.playPrevious}
-        repeatType={props.repeat}
-      />
+const PlayingView = ({
+  playNext,
+  timeDrag,
+  repeatType,
+  currentTime,
+  playingSong,
+  openSnackbar,
+  playPrevious,
+}) => (
+  <div>
+    <div style={{
+      display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '30px',
+    }}
+    >
+      <FontIcon className="material-icons" style={{ width: '300px', fontSize: '300px', color: 'rgba(0,0,0,0.3)' }}>album</FontIcon>
     </div>
-  )
-}
+    <PlayingCtrl
+      song={playingSong}
+      playNext={playNext}
+      timeDrag={timeDrag}
+      repeatType={repeatType}
+      currentTime={currentTime}
+      openSnackbar={openSnackbar}
+      playPrevious={playPrevious}
+    />
+  </div>
+);
 
 PlayingView.propTypes = {
-  playNext: propTypes.func.isRequired,
   timeDrag: propTypes.func.isRequired,
+  playNext: propTypes.func.isRequired,
+  repeatType: propTypes.number.isRequired,
+  openSnackbar: propTypes.func.isRequired,
   playPrevious: propTypes.func.isRequired,
   currentTime: propTypes.number.isRequired,
-  playingSong: propTypes.object.isRequired,
-  repeatType: propTypes.number.isRequired,
-  openSnackbar: propTypes.func.isRequired  
-}
+  playingSong: propTypes.objectOf(propTypes.any).isRequired,
+};
 
 export default PlayingView;

@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import './index.css';
-import App from './App.jsx';
+import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import reducers from './reducers';
-import { loggerMiddleware } from './middleware';
+import loggerMiddleware from './middleware';
 import { saveState, getState } from './store/localStore';
 // import createStoreObserver from  'redux-store-observer'
 
@@ -23,10 +23,10 @@ getState().then((localState) => {
     });
   });
   ReactDOM.render(
+    // eslint-disable-next-line
     <Provider store={store}>
       <App />
-      {/* eslint-disable-next-line */}
-    </Provider>, document.getElementById('root'));
+    </Provider>, document.getElementById('root'),
+  );
 });
 registerServiceWorker();
-

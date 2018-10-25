@@ -3,71 +3,66 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 
 import AddSongs from '../components/AddSongs';
-import Header from '../components/Header'
-import SongList from '../components/SongList'
-import NowPlaying from '../components/NowPlaying'
-import { togglePlaying, nowPlayingPage, addSongs } from "../actions";
-
-const mapStateToProps = state => ({
-  songs: state.songs,
-  playState: state.playState,
-})
+import SongList from '../components/SongList';
+import NowPlaying from '../components/NowPlaying';
+import { togglePlaying, nowPlayingPage, addSongs } from '../actions';
 
 const mapDispatchToProps = dispatch => ({
   toggle: () => dispatch(togglePlaying()),
   openNowPlaying: () => dispatch(nowPlayingPage()),
-  addSongs: (songs) => dispatch(addSongs(songs))
-})
+  addSongs: songs => dispatch(addSongs(songs)),
+});
 
 class MainView extends Component {
-  handleDragOver = event => {
+  handleDragOver = (event) => {
     event.preventDefault();
     event.stopPropagation();
+    // eslint-disable-next-line
     event.dataTransfer.dropEffect = 'copy';
   };
 
   render() {
-    let { songs, playState, openNowPlaying, openSnackbar, currentTime } = this.props
+    const {
+      songs, playState, openNowPlaying, openSnackbar, currentTime, addSongs: add, toggle,
+    } = this.props;
     return (
       <div
-        style={{height: "100%"}}
+        style={{ height: '100%' }}
         onDragOver={this.handleDragOver}
-        onDrop={event => {
+        onDrop={(event) => {
           this.handleDragOver(event);
           if (window.File && window.FileReader && window.FileList && window.Blob) {
-            var files = [...event.dataTransfer.files];
-            files = files.filter(file => file.name && file.name.endsWith(".mp3"));
-            files.length > 0 && this.props.addSongs(files);
+            let files = [...event.dataTransfer.files];
+            files = files.filter(file => file.name && file.name.endsWith('.mp3'));
+            if (files.length > 0) add(files);
           } else {
-            console.log('The File APIs are not fully supported in this browser.');
+            openSnackbar('The File APIs are not fully supported in this browser.');
           }
-          return false;          
-        }}>
-        <Header 
-          openSnackbar={openSnackbar}
-          playingSong={songs[playState.songId]}
-          />
-        <SongList openSnackbar={openSnackbar} songs={songs} />
+          return false;
+        }}
+      >
+        <SongList songs={songs} />
         <AddSongs />
         <NowPlaying
-          openSnackbar={openSnackbar}
-          togglePlaying={this.props.toggle}
+          togglePlaying={toggle}
           playState={playState}
           playingSong={songs[playState.songId]}
-          openNowPlaying={ openNowPlaying }
-          currentTime={currentTime} />
+          openNowPlaying={openNowPlaying}
+          currentTime={currentTime}
+        />
       </div>
-    )
+    );
   }
 }
 
 MainView.propTypes = {
   openNowPlaying: propTypes.func.isRequired,
   toggle: propTypes.func.isRequired,
-  songs: propTypes.array.isRequired,
-  playState: propTypes.object.isRequired,
+  addSongs: propTypes.func.isRequired,
+  songs: propTypes.arrayOf(propTypes.any).isRequired,
+  playState: propTypes.objectOf(propTypes.any).isRequired,
   currentTime: propTypes.number.isRequired,
-  openSnackbar: propTypes.func.isRequired
-}
+  openSnackbar: propTypes.func.isRequired,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainView)
+export default connect(null, mapDispatchToProps)(MainView);
