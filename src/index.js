@@ -8,6 +8,7 @@ import registerServiceWorker from './registerServiceWorker';
 import reducers from './reducers';
 import loggerMiddleware from './middleware';
 import { saveState, getState } from './store/localStore';
+import mediaNotification from './media-session';
 // import createStoreObserver from  'redux-store-observer'
 
 getState().then((localState) => {
@@ -17,6 +18,7 @@ getState().then((localState) => {
   } else {
     store = createStore(reducers, localState);
   }
+  mediaNotification.setStore(store);
   store.subscribe(() => {
     saveState({
       songs: store.getState().songs,

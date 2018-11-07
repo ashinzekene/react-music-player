@@ -1,3 +1,5 @@
+import mediaSession from '../media-session';
+
 export const ADD_SONGS = 'ADD_SONGS';
 export const REMOVE_SONGS = 'REMOVE_SONGS';
 export const TOGGLE_PLAYING = 'TOGGLE_PLAYING';
@@ -21,10 +23,13 @@ export const removeSong = id => ({
   id,
 });
 
-export const playSong = id => ({
-  type: PLAY_SONG,
-  id,
-});
+export const playSong = (id) => {
+  mediaSession.playSong(id);
+  return {
+    type: PLAY_SONG,
+    id,
+  };
+};
 
 export const repeatType = id => ({
   type: REPEAT,

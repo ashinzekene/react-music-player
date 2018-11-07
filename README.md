@@ -4,9 +4,8 @@
 
  [CHECK OUT THE WEB APP](https://ashinzekene.github.io/react-music-player)
 
-  ![React-music-player-1](image-1.jpg | 250x)
-  ![React-music-player-1](image-2.jpg | 250x)
-
+  <img width="350" alt="React music player 1" src="image-1.jpg">
+  <img width="350" alt="React music player 2" src="image-2.jpg">
 ## CONTRIBUTING
 
 Feel free to contribute to the repo. Make sure you configure eslint, or run lint before submitting pull requests
