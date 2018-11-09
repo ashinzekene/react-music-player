@@ -3,11 +3,12 @@ import { togglePlaying, playSong } from './actions/index';
 let store;
 const mediaSessionEnabled = ('mediaSession' in navigator);
 const addNewSong = (id) => {
-  console.log(id);
+  const state = store.getState();
+  console.log('New song', state.songs[id]);
   navigator.mediaSession.metadata = new window.MediaMetadata({
-    title: 'Never Gonna Give You Up',
-    artist: 'Rick Astley',
-    album: 'Whenever You Need Somebody',
+    title: state.songs[id].name,
+    artist: 'Unknown',
+    album: 'Unknown Albumn',
     artwork: [{
       src: 'icons/mipmap-xhdpi/ic_launcher.png',
       sizes: '96x96',
