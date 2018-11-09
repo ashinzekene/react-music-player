@@ -113,8 +113,8 @@ class App extends Component {
   playPrevious = () => {
     const { songs, playState, playSong: play } = this.props;
     URL.revokeObjectURL(songs[playState.songId]);
-    const nextSongId = playState.songId === 0 ? songs.length - 1 : playState.songId - 1;
-    play(nextSongId);
+    const prevSongId = playState.songId === 0 ? songs.length - 1 : playState.songId - 1;
+    play(prevSongId);
   }
 
   updateTime = () => {

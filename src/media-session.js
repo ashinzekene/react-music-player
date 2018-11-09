@@ -1,4 +1,4 @@
-import { togglePlaying } from './actions/index';
+import { togglePlaying, playSong } from './actions/index';
 
 let store;
 const mediaSessionEnabled = ('mediaSession' in navigator);
@@ -33,12 +33,22 @@ const addActionListeners = () => {
     // User clicked "Previous Track" media notification icon.
     // index = (index - 1 + playlist.length) % playlist.length;
     // playAudio();
+    if (store) {
+      const state = store.getState();
+      const prevId = state.playState.songId === 0 ? state.songs.length - 1 : state.playState.songId - 1;
+      store.dispatch(playSong(prevId));
+    }
   });
 
   navigator.mediaSession.setActionHandler('nexttrack', () => {
     // User clicked "Next Track" media notification icon.
     // index = (index + 1) % playlist.length;
     // playAudio();
+    if (store) {
+      const state = store.getState();
+      const nextId = (state.playState.songId + 1) % state.songs.length;
+      store.dispatch(playSong(nextId));
+    }
   });
 
   navigator.mediaSession.setActionHandler('play', () => {
