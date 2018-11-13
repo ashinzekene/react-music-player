@@ -59,7 +59,7 @@ class App extends Component {
     window.addEventListener('beforeinstallprompt', (e) => {
       // Prevent Chrome 67 and earlier from automatically showing the prompt
       e.preventDefault();
-      console.log('event prompt');
+      console.log('before install fired', e);
       // Stash the event so it can be triggered later.
       this.setState({ installEvent: e, addToHomeScreenUIVisible: true });
     });
@@ -67,6 +67,7 @@ class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { playState } = this.props;
+    const { installEvent } = this.state;
     if (nextProps.playState !== playState) {
       if (!nextProps.playState.playing) {
         // PAUSE
@@ -79,6 +80,23 @@ class App extends Component {
         // Start playing
       } else {
         this.playSong(nextProps.playState.songId);
+      }
+      if (installEvent) {
+        installEvent.prompt();
+        installEvent.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the A2HS prompt');
+            this.setState({
+              snackBarOpen: true, snackMsg: '🤗 Yay! You\'ve installed the app',
+            });
+          } else {
+            console.log('User dismissed the A2HS prompt');
+            this.setState({
+              snackBarOpen: true, snackMsg: '😥 Reload the page whenever you change your mind',
+            });
+          }
+          this.snackBarOpen({ installEvent: null });
+        });
       }
     }
   }

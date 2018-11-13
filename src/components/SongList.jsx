@@ -16,7 +16,7 @@ const SongList = ({ songs }) => {
       <List>
         {
           songs.map((song, ind) => (
-            <div key={`song-${song.lastModified}-${song.size}`}>
+            <div key={`song-${(Math.random() * 10000000).toFixed(0)}-${song.size}`}>
               <Song song={song} index={ind} />
               <Divider key={song.lastModified} />
             </div>
