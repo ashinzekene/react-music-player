@@ -31,9 +31,6 @@ const addNewSong = (id) => {
 
 const addActionListeners = () => {
   navigator.mediaSession.setActionHandler('previoustrack', () => {
-    // User clicked "Previous Track" media notification icon.
-    // index = (index - 1 + playlist.length) % playlist.length;
-    // playAudio();
     if (store) {
       const state = store.getState();
       const prevId = state.playState.songId === 0 ? state.songs.length - 1 : state.playState.songId - 1;
@@ -42,9 +39,6 @@ const addActionListeners = () => {
   });
 
   navigator.mediaSession.setActionHandler('nexttrack', () => {
-    // User clicked "Next Track" media notification icon.
-    // index = (index + 1) % playlist.length;
-    // playAudio();
     if (store) {
       const state = store.getState();
       const nextId = (state.playState.songId + 1) % state.songs.length;
@@ -53,15 +47,11 @@ const addActionListeners = () => {
   });
 
   navigator.mediaSession.setActionHandler('play', () => {
-    // User clicked "Play" media notification icon.
     if (store) store.dispatch(togglePlaying());
-    // Do something more than just playing current audio...
   });
 
   navigator.mediaSession.setActionHandler('pause', () => {
     if (store) store.dispatch(togglePlaying());
-    // User clicked "Pause" media notification icon.
-    // Do something more than just pausing current audio...
   });
 };
 if (mediaSessionEnabled) addActionListeners();
