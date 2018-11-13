@@ -41,6 +41,7 @@ class App extends Component {
       currentTime: 0,
       snackBarOpen: false,
       snackMsg: '',
+      hideSnackAction: false,
       installEvent: null,
       addToHomeScreenUIVisible: false,
     };
@@ -87,12 +88,12 @@ class App extends Component {
           if (choiceResult.outcome === 'accepted') {
             console.log('User accepted the A2HS prompt');
             this.setState({
-              snackBarOpen: true, snackMsg: '🤗 Yay! You\'ve installed the app',
+              snackBarOpen: true, hideSnackAction: true, snackMsg: '🤗 Yay! You\'ve installed the app',
             });
           } else {
             console.log('User dismissed the A2HS prompt');
             this.setState({
-              snackBarOpen: true, snackMsg: '😥 Reload the page whenever you change your mind',
+              snackBarOpen: true, hideSnackAction: true, snackMsg: '😥 Reload the page whenever you change your mind',
             });
           }
           this.snackBarOpen({ installEvent: null });
@@ -100,7 +101,6 @@ class App extends Component {
       }
     }
   }
-
 
   componentWillUnmount() {
     this.releaseKeyboardEvents();
@@ -159,12 +159,12 @@ class App extends Component {
   }
 
   handleRequestClose = () => {
-    this.setState({ snackBarOpen: false, snackMsg: '' });
+    this.setState({ snackBarOpen: false, snackMsg: '', hideSnackAction: false });
   }
 
   render() {
     const {
-      currentTime, snackBarOpen, snackMsg, installEvent, addToHomeScreenUIVisible,
+      currentTime, snackBarOpen, snackMsg, installEvent, addToHomeScreenUIVisible, hideSnackAction,
     } = this.state;
     const {
       songs, playState, openNowPlaying, toggle, repeatType, page,
@@ -210,7 +210,7 @@ class App extends Component {
           }
           <Snackbar
             open={snackBarOpen}
-            action="make a PR 😊"
+            action={!hideSnackAction && 'make a PR 😊'}
             autoHideDuration={4000}
             onActionClick={this.handleActionClick}
             onRequestClose={this.handleRequestClose}
