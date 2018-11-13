@@ -4,8 +4,11 @@
 
  [CHECK OUT THE WEB APP](https://ashinzekene.github.io/react-music-player)
 
-  <img width="350" alt="React music player 1" src="image-1.jpg">
-  <img width="350" alt="React music player 2" src="image-2.jpg">
+  <img style="display:inline-block" width="350" alt="React music player 1" src="image-1.jpg">
+  <img style="display:inline-block" width="350" alt="React music player 2" src="image-2.jpg">
+  <img width="700" alt="React music player 3" src="image-3.jpg">
+  <img width="700" alt="React music player 4" src="image-4.jpg">
+ 
 ## CONTRIBUTING
 
 Feel free to contribute to the repo. Make sure you configure eslint, or run lint before submitting pull requests
