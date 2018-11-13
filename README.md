@@ -17,8 +17,8 @@ Feel free to contribute to the repo. Make sure you configure eslint, or run lint
 1. Play/Pause
 1. Repeat Options
 1. Progress Bar
-1. Drag and Drop - Thanks to @CliffReimers
-1. Keyborad Controls - Thanks to @Spring3
+1. Drag and Drop - Thanks to [@CliffReimers](@CliffReimers)
+1. Keyborad Controls - Thanks to [@Spring3](@Spring3)
 
 ## TODO LIST
 
