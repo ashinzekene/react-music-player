@@ -40,6 +40,7 @@ class App extends Component {
     this.state = {
       currentTime: 0,
       snackBarOpen: false,
+      hasRejectedInstall: false,
       snackMsg: '',
       hideSnackAction: false,
       installEvent: null,
@@ -68,7 +69,7 @@ class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { playState } = this.props;
-    const { installEvent } = this.state;
+    const { installEvent, hasRejectedInstall } = this.state;
     if (nextProps.playState !== playState) {
       if (!nextProps.playState.playing) {
         // PAUSE
@@ -82,7 +83,7 @@ class App extends Component {
       } else {
         this.playSong(nextProps.playState.songId);
       }
-      if (installEvent) {
+      if (installEvent && !hasRejectedInstall) {
         installEvent.prompt();
         installEvent.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
@@ -93,7 +94,10 @@ class App extends Component {
           } else {
             console.log('User dismissed the A2HS prompt');
             this.setState({
-              snackBarOpen: true, hideSnackAction: true, snackMsg: '😥 Reload the page whenever you change your mind',
+              snackBarOpen: true,
+              hideSnackAction: true,
+              hasRejectedInstall: true,
+              snackMsg: '😥 Reload the page whenever you change your mind',
             });
           }
           this.snackBarOpen({ installEvent: null });
