@@ -29,7 +29,7 @@ class MainView extends Component {
       <div
         style={{ height: '100%' }}
         onDragOver={this.handleDragOver}
-        onDrop={async (event) => {
+        onDrop={(event) => {
           this.handleDragOver(event);
           if (window.File && window.FileReader && window.FileList && window.Blob) {
             const files = [...event.dataTransfer.files].filter(({ name }) => name && name.endsWith('.mp3'));
