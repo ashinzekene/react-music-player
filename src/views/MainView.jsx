@@ -32,8 +32,7 @@ class MainView extends Component {
         onDrop={(event) => {
           this.handleDragOver(event);
           if (window.File && window.FileReader && window.FileList && window.Blob) {
-            let files = [...event.dataTransfer.files];
-            files = files.filter(file => file.name && file.name.endsWith('.mp3'));
+            const files = [...event.dataTransfer.files].filter(({ name }) => name && name.endsWith('.mp3'));
             if (files.length > 0) add(files);
           } else {
             openSnackbar('The File APIs are not fully supported in this browser.');

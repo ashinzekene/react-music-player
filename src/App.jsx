@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { indigo400 } from 'material-ui/styles/colors';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -13,7 +12,6 @@ import Header from './components/Header';
 import PlayingView from './views/PlayingView';
 import keyboardEvents from './utils/keyboardEvents';
 
-injectTapEventPlugin();
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -33,13 +31,13 @@ const mapDispatchToProps = dispatch => ({
   playSong: id => dispatch(playSong(id)),
 });
 
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentTime: 0,
       snackBarOpen: false,
+      hasRejectedInstall: false,
       snackMsg: '',
       hideSnackAction: false,
       installEvent: null,
@@ -68,7 +66,7 @@ class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { playState } = this.props;
-    const { installEvent } = this.state;
+    const { installEvent, hasRejectedInstall } = this.state;
     if (nextProps.playState !== playState) {
       if (!nextProps.playState.playing) {
         // PAUSE
@@ -82,7 +80,7 @@ class App extends Component {
       } else {
         this.playSong(nextProps.playState.songId);
       }
-      if (installEvent) {
+      if (installEvent && !hasRejectedInstall) {
         installEvent.prompt();
         installEvent.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
@@ -93,7 +91,10 @@ class App extends Component {
           } else {
             console.log('User dismissed the A2HS prompt');
             this.setState({
-              snackBarOpen: true, hideSnackAction: true, snackMsg: '😥 Reload the page whenever you change your mind',
+              snackBarOpen: true,
+              hideSnackAction: true,
+              hasRejectedInstall: true,
+              snackMsg: '😥 Reload the page whenever you change your mind',
             });
           }
           this.snackBarOpen({ installEvent: null });
@@ -136,7 +137,7 @@ class App extends Component {
   }
 
   updateTime = () => {
-    const currentTime = 100 * this.audioPlayer.currentTime / this.audioPlayer.duration;
+    const currentTime = 100 * this.audioPlayer.currentTime / this.audioPlayer.duration || 0;
     this.setState({ currentTime });
   }
 
