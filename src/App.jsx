@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { indigo400 } from 'material-ui/styles/colors';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -13,7 +12,6 @@ import Header from './components/Header';
 import PlayingView from './views/PlayingView';
 import keyboardEvents from './utils/keyboardEvents';
 
-injectTapEventPlugin();
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -32,7 +30,6 @@ const mapDispatchToProps = dispatch => ({
   toggle: () => dispatch(togglePlaying()),
   playSong: id => dispatch(playSong(id)),
 });
-
 
 class App extends Component {
   constructor(props) {
@@ -140,7 +137,7 @@ class App extends Component {
   }
 
   updateTime = () => {
-    const currentTime = 100 * this.audioPlayer.currentTime / this.audioPlayer.duration;
+    const currentTime = 100 * this.audioPlayer.currentTime / this.audioPlayer.duration || 0;
     this.setState({ currentTime });
   }
 
