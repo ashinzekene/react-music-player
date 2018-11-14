@@ -1,21 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
-import id3js from 'id3js';
 
 import AddSongs from '../components/AddSongs';
 import SongList from '../components/SongList';
 import NowPlaying from '../components/NowPlaying';
 import { togglePlaying, nowPlayingPage, addSongs } from '../actions';
-
-const getSongTags = song => new Promise((res, rej) => {
-  id3js(song, (err, tags) => {
-    if (err) {
-      return rej(err);
-    }
-    return res(tags);
-  });
-});
 
 const mapDispatchToProps = dispatch => ({
   toggle: () => dispatch(togglePlaying()),
@@ -43,7 +33,6 @@ class MainView extends Component {
           this.handleDragOver(event);
           if (window.File && window.FileReader && window.FileList && window.Blob) {
             const files = [...event.dataTransfer.files].filter(({ name }) => name && name.endsWith('.mp3'));
-            console.log(await Promise.all(files.map(getSongTags)));
             if (files.length > 0) add(files);
           } else {
             openSnackbar('The File APIs are not fully supported in this browser.');
