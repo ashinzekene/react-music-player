@@ -48,7 +48,7 @@ class App extends Component {
   componentDidMount() {
     const { songs, toggle } = this.props;
     if (songs[0]) {
-      this.audioPlayer.src = URL.createObjectURL(songs[0]);
+      this.audioPlayer.src = URL.createObjectURL(songs[0].song);
     }
     this.releaseKeyboardEvents = keyboardEvents({
       playNext: this.playNext,
@@ -144,10 +144,10 @@ class App extends Component {
   playSong = (id) => {
     const { songs } = this.props;
     if (songs[id]) {
-      const fileSrc = URL.createObjectURL(songs[id]);
+      const fileSrc = URL.createObjectURL(songs[id].song);
       this.audioPlayer.src = fileSrc;
       this.audioPlayer.play();
-      window.document.title = songs[id].name.replace('.mp3', '');
+      window.document.title = songs[id].title.replace('.mp3', '');
     }
   }
 

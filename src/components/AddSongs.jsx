@@ -1,28 +1,17 @@
 import React from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { addSongs } from '../actions';
-
-const mapDispatchToProps = dispatch => ({
-  addSongs: songs => dispatch(addSongs(songs)),
-});
-
+import getMetaData from '../utils/metadata';
 
 class AddSongs extends React.Component {
-  constructor(props) {
-    super(props);
-    this.addSong = this.addSong.bind(this);
-    this.triggerInput = this.triggerInput.bind(this);
-  }
-
-  triggerInput() {
+  triggerInput = () => {
     this.fileInput.click();
   }
 
-  addSong(e) {
+  addSong = async e => {
     const { addSongs: add } = this.props;
-    add(e.currentTarget.files);
+    const files = [...e.currentTarget.files];
+    add(await Promise.all(files.map(getMetaData)));
   }
 
   render() {
@@ -56,4 +45,4 @@ AddSongs.propTypes = {
   addSongs: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(AddSongs);
+export default AddSongs;

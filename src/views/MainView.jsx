@@ -6,6 +6,7 @@ import AddSongs from '../components/AddSongs';
 import SongList from '../components/SongList';
 import NowPlaying from '../components/NowPlaying';
 import { togglePlaying, nowPlayingPage, addSongs } from '../actions';
+import getMetaData from '../utils/metadata';
 
 const mapDispatchToProps = dispatch => ({
   toggle: () => dispatch(togglePlaying()),
@@ -29,11 +30,12 @@ class MainView extends Component {
       <div
         style={{ height: '100%' }}
         onDragOver={this.handleDragOver}
-        onDrop={(event) => {
+        onDrop={async (event) => {
           this.handleDragOver(event);
           if (window.File && window.FileReader && window.FileList && window.Blob) {
             const files = [...event.dataTransfer.files].filter(({ name }) => name && name.endsWith('.mp3'));
-            if (files.length > 0) add(files);
+            // console.log(await Promise.all(files.map(getMetaData)))
+            if (files.length > 0) add(await Promise.all(files.map(getMetaData)));
           } else {
             openSnackbar('The File APIs are not fully supported in this browser.');
           }
@@ -41,7 +43,7 @@ class MainView extends Component {
         }}
       >
         <SongList songs={songs} />
-        <AddSongs />
+        <AddSongs addSongs={add} />
         <NowPlaying
           togglePlaying={toggle}
           playState={playState}

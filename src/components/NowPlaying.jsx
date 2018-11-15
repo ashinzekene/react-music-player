@@ -23,7 +23,7 @@ const NowPlaying = (props) => {
             <Avatar icon={<ImageMusicNote />} />
           </div>
           <div style={{ display: 'inline-block', width: '77%' }} className="song-title">
-            {playingSong ? playingSong.name : '[No song]'}
+            {playingSong ? playingSong.title : '[No song]'}
           </div>
         </div>
         <div style={{ width: '50px' }} className="play-pause-button">

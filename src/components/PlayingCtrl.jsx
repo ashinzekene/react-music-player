@@ -41,7 +41,7 @@ class PlayingCtrl extends Component {
 
     return (
       <Paper className="play-control" zDepth={0} rounded={false}>
-        <h3 className="song-title">{ song.name }</h3>
+        <h3 className="song-title">{ song.title }</h3>
         <Slider style={{ height: '2px' }} className="song-progress" value={currentTime} onChange={(_, newVal) => timeDrag(newVal)} max={100} min={0} defaultValue={2} />
         <div className="now-playing-container">
           <div style={{ width: '35%', textAlign: 'center' }} className="side-icons">

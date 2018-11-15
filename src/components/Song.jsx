@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ListItem } from 'material-ui/List';
 import { connect } from 'react-redux';
 import ImageMusicNote from 'material-ui/svg-icons/image/music-note';
@@ -11,55 +11,43 @@ import { IconMenu } from 'material-ui';
 import { removeSong, playSong } from '../actions';
 
 const mapStateToDispatch = dispatch => ({
-  removeSong: id => dispatch(removeSong(id)),
-  playSong: id => dispatch(playSong(id)),
+  remove: id => dispatch(removeSong(id)),
+  play: id => dispatch(playSong(id)),
 });
 
+// const createImgUrl = image => {
+//   const blob = new Blob([new Uint8Array(image.data)]);
+//   return URL.createObjectURL(blob);
+// }
 
-class Song extends Component {
-  handleClick = () => {
-    const { playSong: play, index } = this.props;
-    play(index);
-  }
+const MenuOptions = ({ remove }) => (
+<div>
+  <MenuItem onClick={this.removeSong} primaryText="RemoveSong" />
+</div>
+)
 
-  removeSong = () => {
-    const { removeSong: remove, index } = this.props;
-    remove(index);
-  }
-
-  menuOptions = () => (
-    <div>
-      <MenuItem onClick={this.removeSong} primaryText="RemoveSong" />
-      {/* eslint-disable-next-line */}
-      <MenuItem onClick={this.props.openSnackbar} primaryText="Add to Playlist" />
-    </div>
-  )
-
-  render() {
-    const { song } = this.props;
-    return (
-      <ListItem
-        className="song"
-        onClick={this.handleClick}
-        leftAvatar={<Avatar icon={<ImageMusicNote />} />}
-        primaryText={<div className="song-title">{ song.name }</div>}
-        rightIconButton={(
-          <IconMenu
-            iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-            targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-          >
-            { this.menuOptions() }
-          </IconMenu>
-        )}
-      />
-    );
-  }
-}
+const Song = ({ play, remove, song, index }) => (
+  <ListItem
+    className="song"
+    onClick={() => play(index)}
+    leftAvatar={<Avatar icon={<ImageMusicNote />} />}
+    primaryText={<div className="song-title">{ song.title }</div>}
+    secondaryText={<div className="song-title">{ song.artist || song.album }</div>}
+    rightIconButton={(
+      <IconMenu
+        iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+        targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+      >
+        <MenuOptions remove={remove}/>
+      </IconMenu>
+    )}
+  />
+);
 
 Song.propTypes = {
-  removeSong: PropTypes.func.isRequired,
-  playSong: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
+  play: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   song: PropTypes.objectOf(PropTypes.any).isRequired,
 };

@@ -4,11 +4,11 @@ let store;
 const mediaSessionEnabled = ('mediaSession' in navigator);
 const addNewSong = (id) => {
   const state = store.getState();
-  console.log('New song', state.songs[id]);
+  const song = state.songs[id];
   navigator.mediaSession.metadata = new window.MediaMetadata({
-    title: state.songs[id].name,
-    artist: 'Unknown',
-    album: 'Unknown Albumn',
+    title: song.title,
+    artist: song.artist,
+    album: song.album,
     artwork: [{
       src: 'icons/mipmap-xhdpi/ic_launcher.png',
       sizes: '96x96',
