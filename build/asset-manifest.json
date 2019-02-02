@@ -1,6 +1,13 @@
 {
-  "main.css": "static/css/main.0e1a09b3.css",
-  "main.css.map": "static/css/main.0e1a09b3.css.map",
-  "main.js": "static/js/main.d3b1ae79.js",
-  "main.js.map": "static/js/main.d3b1ae79.js.map"
+  "main.css": "/react-music-player/static/css/main.676ecb85.chunk.css",
+  "main.js": "/react-music-player/static/js/main.33e3683b.chunk.js",
+  "main.js.map": "/react-music-player/static/js/main.33e3683b.chunk.js.map",
+  "static/js/1.81f1ea0f.chunk.js": "/react-music-player/static/js/1.81f1ea0f.chunk.js",
+  "static/js/1.81f1ea0f.chunk.js.map": "/react-music-player/static/js/1.81f1ea0f.chunk.js.map",
+  "runtime~main.js": "/react-music-player/static/js/runtime~main.ac77fe0b.js",
+  "runtime~main.js.map": "/react-music-player/static/js/runtime~main.ac77fe0b.js.map",
+  "static/css/main.676ecb85.chunk.css.map": "/react-music-player/static/css/main.676ecb85.chunk.css.map",
+  "index.html": "/react-music-player/index.html",
+  "precache-manifest.d1bc97409b944f329bee1cc91e14b5f2.js": "/react-music-player/precache-manifest.d1bc97409b944f329bee1cc91e14b5f2.js",
+  "service-worker.js": "/react-music-player/service-worker.js"
 }
