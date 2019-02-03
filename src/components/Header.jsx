@@ -3,12 +3,19 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import AppBar from '@material-ui/core/AppBar';
-import MenuItem from 'material-ui/MenuItem';
-import Toolbar from '@material-ui/core/Toolbar';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+
 import MenuIcon from '@material-ui/icons/Menu';
+import NowPlayingIcon from '@material-ui/icons/PlaylistPlay';
+import PlayListIcon from '@material-ui/icons/List';
+import HomeIcon from '@material-ui/icons/Home';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 import {
   HOME_PAGE, SETTINGS_PAGE, NOW_PLAYING_PAGE, PLAYLIST_PAGE,
@@ -52,10 +59,23 @@ class Header extends Component {
         </AppBar>
         <div className="header-padding" style={{ height: '55px' }} />
         <SwipeableDrawer anchor="left" open={open} onClose={this.openPage()} onOpen={this.openPage()}>
-          <MenuItem onClick={this.openPage(HOME_PAGE)}>Home</MenuItem>
-          <MenuItem onClick={this.openPage(NOW_PLAYING_PAGE)}>NowPlaying</MenuItem>
-          <MenuItem onClick={this.openPage(PLAYLIST_PAGE)}>Playlists</MenuItem>
-          <MenuItem onClick={this.openPage(SETTINGS_PAGE)}>Settings</MenuItem>
+          <ListItem button />
+          <ListItem button onClick={this.openPage(HOME_PAGE)}>
+            <ListItemIcon><HomeIcon /></ListItemIcon>
+            <ListItemText>Home</ListItemText>
+          </ListItem>
+          <ListItem button onClick={this.openPage(NOW_PLAYING_PAGE)}>
+            <ListItemIcon><NowPlayingIcon /></ListItemIcon>
+            <ListItemText>NowPlaying</ListItemText>
+          </ListItem>
+          <ListItem button onClick={this.openPage(PLAYLIST_PAGE)}>
+            <ListItemIcon><PlayListIcon /></ListItemIcon>
+            <ListItemText>Playlists</ListItemText>
+          </ListItem>
+          <ListItem button onClick={this.openPage(SETTINGS_PAGE)}>
+            <ListItemIcon><SettingsIcon /></ListItemIcon>
+            <ListItemText>Settings</ListItemText>
+          </ListItem>
         </SwipeableDrawer>
       </div>
     );
