@@ -1,6 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import FontIcon from 'material-ui/FontIcon';
+import Album from '@material-ui/icons/Album';
+
 import PlayingCtrl from '../components/PlayingCtrl';
 
 const PlayingView = ({
@@ -18,7 +19,7 @@ const PlayingView = ({
       display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '30px',
     }}
     >
-      <FontIcon className="material-icons" style={{ width: '300px', fontSize: '300px', color: 'rgba(0,0,0,0.3)' }}>album</FontIcon>
+      <Album style={{ width: '300px', fontSize: '300px', color: 'rgba(0,0,0,0.3)' }} />
     </div>
     <PlayingCtrl
       song={playingSong}

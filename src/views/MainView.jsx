@@ -27,7 +27,6 @@ class MainView extends Component {
     } = this.props;
     return (
       <div
-        style={{ height: '100%' }}
         onDragOver={this.handleDragOver}
         onDrop={(event) => {
           this.handleDragOver(event);
