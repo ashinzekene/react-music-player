@@ -214,7 +214,7 @@ class App extends Component {
             onClose={this.handleRequestClose}
             ContentProps={{ 'aria-describedby': 'message-id' }}
             message={(
-              <span id="message-id">{snackMsg || 'Not Implemented yet, You can make a PR 😊'}</span>
+              <span id="message-id">{snackMsg || 'Not Implemented yet 😊'}</span>
             )}
             action={
               !hideSnackAction && (
