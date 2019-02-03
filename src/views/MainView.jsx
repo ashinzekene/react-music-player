@@ -17,7 +17,7 @@ class MainView extends Component {
   handleDragOver = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    // eslint-disable-next-line
+    // eslint-disable-next-line no-param-reassign
     event.dataTransfer.dropEffect = 'copy';
   };
 

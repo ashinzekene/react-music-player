@@ -48,7 +48,9 @@ class PlayingCtrl extends Component {
         <div className="now-playing-container">
           <div style={{ width: '35%', textAlign: 'center' }} className="side-icons">
             <IconButton onClick={this.changeRepeat}>
-              { repeat === 1 ? <RepeatOne /> : <Repeat className={repeat === 2 && 'disabled'} />}
+              { repeat === 1
+                ? <RepeatOne /> : <Repeat style={repeat === 2 ? {} : { opacity: 0.5 }} />
+              }
             </IconButton>
             <IconButton onClick={playPrevious}>
               <SkipPrevious />
@@ -56,9 +58,7 @@ class PlayingCtrl extends Component {
           </div>
           <div style={{ width: '30%', textAlign: 'center' }} className="play-pause-button">
             <IconButton onClick={toggle}>
-              {
-                playState.playing ? <PauseIcon /> : <PlayIcon />
-              }
+              { playState.playing ? <PauseIcon /> : <PlayIcon /> }
             </IconButton>
           </div>
           <div style={{ width: '35%', textAlign: 'center' }} className="side-icons">

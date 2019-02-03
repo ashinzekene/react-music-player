@@ -5,14 +5,8 @@ import Album from '@material-ui/icons/Album';
 import PlayingCtrl from '../components/PlayingCtrl';
 
 const PlayingView = ({
-  playNext,
-  timeDrag,
-  repeatType,
-  currentTime,
-  playingSong,
-  openSnackbar,
-  playPrevious,
-  installEvent,
+  playNext, timeDrag, repeatType, currentTime,
+  playingSong, openSnackbar, playPrevious, installEvent,
 }) => (
   <div>
     <div style={{
@@ -34,13 +28,17 @@ const PlayingView = ({
   </div>
 );
 
+PlayingView.defaultProps = {
+  installEvent: () => {},
+};
+
 PlayingView.propTypes = {
   timeDrag: propTypes.func.isRequired,
   playNext: propTypes.func.isRequired,
   repeatType: propTypes.number.isRequired,
   openSnackbar: propTypes.func.isRequired,
   playPrevious: propTypes.func.isRequired,
-  installEvent: propTypes.oneOf([propTypes.func.isRequired, propTypes.any]).isRequired,
+  installEvent: propTypes.func,
   currentTime: propTypes.number.isRequired,
   playingSong: propTypes.objectOf(propTypes.any).isRequired,
 };

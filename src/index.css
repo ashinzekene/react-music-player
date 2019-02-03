@@ -29,13 +29,12 @@ body {
 }
 
 .play-control {
-  /* z-index: 4000; */
   position: fixed;
   bottom: 0px;
   left: 0px;
   width: 100%;
   padding-bottom: 10px;
-  height: 165px;
+  height: 130px;
 }
 .song-title {
   padding: 0px 12px;

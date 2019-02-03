@@ -62,10 +62,11 @@ class App extends Component {
       if (!nextProps.playState.playing) {
         // PAUSE
         this.audioPlayer.pause();
-      } else if (nextProps.playState.songId === 0) {
+      } else if (nextProps.playState.songId === -1) {
         this.playSong(0);
       } else if (nextProps.playState.songId === playState.songId) {
         // RESUME
+        console.log('Should only resume');
         this.audioPlayer.play();
         // Start playing
       } else {
@@ -110,7 +111,7 @@ class App extends Component {
     // No repeat
     if (repeatType === 0) {
       URL.revokeObjectURL(songs[playState.songId]);
-      if (playState.songId < songs.length) play(playState.songId + 1);
+      if (playState.songId < songs.length - 1) play(playState.songId + 1);
     } else if (repeatType === 1) {
       // repeat one
       play(playState.songId);
@@ -157,7 +158,7 @@ class App extends Component {
       currentTime, snackBarOpen, snackMsg, installEvent, addToHomeScreenUIVisible, hideSnackAction,
     } = this.state;
     const {
-      songs, playState, openNowPlaying, toggle, repeatType, page,
+      songs, playState, toggle, repeatType, page,
     } = this.props;
     return (
       <>
@@ -194,7 +195,6 @@ class App extends Component {
               toggle={toggle}
               playState={playState}
               currentTime={currentTime}
-              openNowPlaying={openNowPlaying}
               openSnackbar={msg => this.setState({ snackBarOpen: true, snackMsg: msg })}
             />
           )}
@@ -228,7 +228,6 @@ App.propTypes = {
   repeatType: PropTypes.oneOf([0, 1, 2]).isRequired,
   toggle: PropTypes.func.isRequired,
   playSong: PropTypes.func.isRequired,
-  openNowPlaying: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
