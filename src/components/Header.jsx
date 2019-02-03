@@ -25,6 +25,28 @@ const mapDispatchToProps = dispatch => ({
   openPage: type => dispatch({ type }),
 });
 
+const menuOptions = [
+  {
+    option: 'Home',
+    page: HOME_PAGE,
+    icon: <HomeIcon />,
+  },
+  {
+    option: 'NowPlaying',
+    page: NOW_PLAYING_PAGE,
+    icon: <NowPlayingIcon />,
+  },
+  {
+    option: 'Playlists',
+    page: PLAYLIST_PAGE,
+    icon: <PlayListIcon />,
+  },
+  {
+    option: 'Settings',
+    page: SETTINGS_PAGE,
+    icon: <SettingsIcon />,
+  },
+];
 
 class Header extends Component {
   state = {
@@ -34,11 +56,11 @@ class Header extends Component {
   openPage = page => () => {
     const { openPage, playState, openSnackbar } = this.props;
     this.setState(prevState => ({ open: !prevState.open }));
-    // Don't Open now playing page when there is no song
     if (page === PLAYLIST_PAGE || page === SETTINGS_PAGE) {
       openSnackbar();
       return;
     }
+    // Don't Open now playing page when there is no song
     if (!playState && page === NOW_PLAYING_PAGE) return;
     if (page) openPage(page);
   }
@@ -60,22 +82,14 @@ class Header extends Component {
         <div className="header-padding" style={{ height: '55px' }} />
         <SwipeableDrawer anchor="left" open={open} onClose={this.openPage()} onOpen={this.openPage()}>
           <ListItem button />
-          <ListItem button onClick={this.openPage(HOME_PAGE)}>
-            <ListItemIcon><HomeIcon /></ListItemIcon>
-            <ListItemText>Home</ListItemText>
-          </ListItem>
-          <ListItem button onClick={this.openPage(NOW_PLAYING_PAGE)}>
-            <ListItemIcon><NowPlayingIcon /></ListItemIcon>
-            <ListItemText>NowPlaying</ListItemText>
-          </ListItem>
-          <ListItem button onClick={this.openPage(PLAYLIST_PAGE)}>
-            <ListItemIcon><PlayListIcon /></ListItemIcon>
-            <ListItemText>Playlists</ListItemText>
-          </ListItem>
-          <ListItem button onClick={this.openPage(SETTINGS_PAGE)}>
-            <ListItemIcon><SettingsIcon /></ListItemIcon>
-            <ListItemText>Settings</ListItemText>
-          </ListItem>
+          {
+            menuOptions.map(option => (
+              <ListItem key={option.option} button onClick={this.openPage(option.page)}>
+                <ListItemIcon>{option.icon}</ListItemIcon>
+                <ListItemText>{option.option}</ListItemText>
+              </ListItem>
+            ))
+          }
         </SwipeableDrawer>
       </div>
     );
