@@ -50,6 +50,7 @@ class Header extends Component {
             </Typography>
           </Toolbar>
         </AppBar>
+        <div className="header-padding" style={{ height: '55px' }} />
         <SwipeableDrawer anchor="left" open={open} onClose={this.openPage()} onOpen={this.openPage()}>
           <MenuItem onClick={this.openPage(HOME_PAGE)}>Home</MenuItem>
           <MenuItem onClick={this.openPage(NOW_PLAYING_PAGE)}>NowPlaying</MenuItem>
