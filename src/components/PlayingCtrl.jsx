@@ -67,6 +67,10 @@ class PlayingCtrl extends Component {
   }
 }
 
+PlayingCtrl.defaultProps = {
+  installEvent: null,
+};
+
 PlayingCtrl.propTypes = {
   timeDrag: propTypes.func.isRequired,
   playNext: propTypes.func.isRequired,
@@ -78,7 +82,7 @@ PlayingCtrl.propTypes = {
   togglePlaying: propTypes.func.isRequired,
   song: propTypes.objectOf(propTypes.any).isRequired,
   playState: propTypes.objectOf(propTypes.any).isRequired,
-  installEvent: propTypes.oneOf([propTypes.func.isRequired, propTypes.any]).isRequired,
+  installEvent: propTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayingCtrl);

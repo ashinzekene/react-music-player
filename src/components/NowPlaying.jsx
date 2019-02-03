@@ -1,36 +1,30 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import Avatar from 'material-ui/Avatar';
-import Paper from 'material-ui/Paper';
-import IconButton from 'material-ui/IconButton';
-import FontIcon from 'material-ui/FontIcon';
-import LinearProgress from 'material-ui/LinearProgress';
-import ImageMusicNote from 'material-ui/svg-icons/image/music-note';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
+import Paper from '@material-ui/core/Paper';
+import PauseIcon from '@material-ui/icons/Pause';
+import MusicNote from '@material-ui/icons/MusicNote';
+import PlayIcon from '@material-ui/icons/PlayCircleFilled';
+import Avatar from '@material-ui/core/Avatar';
 
 const NowPlaying = (props) => {
   const {
     playState, playingSong, currentTime, togglePlaying, openNowPlaying,
   } = props;
-  const button = playState.playing ? 'pause_circle_filled' : 'play_circle_filled';
   return (
-    <Paper className="small-now-playing" zDepth={5} rounded={false}>
-      <LinearProgress className="song-progress" mode="determinate" min={0} max={100} value={currentTime} />
-      <div style={{ display: 'flex', padding: '20px 10px' }} className="now-playing-container">
-        {/* eslint-disable-next-line */}
-        <div style={{ width: '90%' }} role="button" tabIndex="0" onClick={playingSong && openNowPlaying}>
-          <div style={{ width: '15%', display: 'inline-block' }}>
-            <Avatar icon={<ImageMusicNote />} />
-          </div>
-          <div style={{ display: 'inline-block', width: '77%' }} className="song-title">
-            {playingSong ? playingSong.name : '[No song]'}
-          </div>
+    <Paper className="small-now-playing" onClick={playingSong && openNowPlaying}>
+      <LinearProgress variant="determinate" value={currentTime} />
+      <div className="now-playing-container">
+        <Avatar>
+          <MusicNote />
+        </Avatar>
+        <div className="song-name">
+          {playingSong ? playingSong.name : '[No song]'}
         </div>
-        <div style={{ width: '50px' }} className="play-pause-button">
-          <IconButton onClick={togglePlaying}>
-            <FontIcon style={{ fontSize: '60px' }} className="material-icons">{button}</FontIcon>
-          </IconButton>
-        </div>
+        <button type="button" onClick={togglePlaying}>
+          { playState.playing ? <PlayIcon /> : <PauseIcon /> }
+        </button>
       </div>
     </Paper>
   );
