@@ -4,7 +4,6 @@ let store;
 const mediaSessionEnabled = ('mediaSession' in navigator);
 const addNewSong = (id) => {
   const state = store.getState();
-  console.log('New song', state.songs[id]);
   navigator.mediaSession.metadata = new window.MediaMetadata({
     title: state.songs[id].name,
     artist: 'Unknown',
@@ -33,7 +32,8 @@ const addActionListeners = () => {
   navigator.mediaSession.setActionHandler('previoustrack', () => {
     if (store) {
       const state = store.getState();
-      const prevId = state.playState.songId === 0 ? state.songs.length - 1 : state.playState.songId - 1;
+      const prevId = state.playState.songId === 0
+        ? state.songs.length - 1 : state.playState.songId - 1;
       store.dispatch(playSong(prevId));
     }
   });

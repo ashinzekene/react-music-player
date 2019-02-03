@@ -58,7 +58,6 @@ class App extends Component {
     window.addEventListener('beforeinstallprompt', (e) => {
       // Prevent Chrome 67 and earlier from automatically showing the prompt
       e.preventDefault();
-      console.log('before install fired', e);
       // Stash the event so it can be triggered later.
       this.setState({ installEvent: e, addToHomeScreenUIVisible: true });
     });
@@ -84,12 +83,10 @@ class App extends Component {
         installEvent.prompt();
         installEvent.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
-            console.log('User accepted the A2HS prompt');
             this.setState({
               snackBarOpen: true, hideSnackAction: true, snackMsg: '🤗 Yay! You\'ve installed the app',
             });
           } else {
-            console.log('User dismissed the A2HS prompt');
             this.setState({
               snackBarOpen: true,
               hideSnackAction: true,
@@ -199,16 +196,17 @@ class App extends Component {
                 playPrevious={this.playPrevious}
                 playingSong={songs[playState.songId]}
                 openSnackbar={msg => this.setState({ snackBarOpen: true, snackMsg: msg })}
-              />) : (
-                <MainView
-                  songs={songs}
-                  toggle={toggle}
-                  playState={playState}
-                  currentTime={currentTime}
-                  openNowPlaying={openNowPlaying}
-                  openSnackbar={msg => this.setState({ snackBarOpen: true, snackMsg: msg })}
-                />)
-          }
+              />
+            ) : (
+              <MainView
+                songs={songs}
+                toggle={toggle}
+                playState={playState}
+                currentTime={currentTime}
+                openNowPlaying={openNowPlaying}
+                openSnackbar={msg => this.setState({ snackBarOpen: true, snackMsg: msg })}
+              />
+            )}
           <Snackbar
             open={snackBarOpen}
             action={!hideSnackAction && 'make a PR 😊'}
@@ -233,6 +231,7 @@ App.propTypes = {
   repeatType: PropTypes.oneOf([0, 1, 2]).isRequired,
   toggle: PropTypes.func.isRequired,
   playSong: PropTypes.func.isRequired,
+  openNowPlaying: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
