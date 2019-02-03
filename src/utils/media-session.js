@@ -1,4 +1,4 @@
-import { togglePlaying, playSong } from './actions/index';
+import { togglePlaying, playSong } from '../actions';
 
 let store;
 const mediaSessionEnabled = ('mediaSession' in navigator);

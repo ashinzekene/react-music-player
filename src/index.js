@@ -8,8 +8,7 @@ import registerServiceWorker from './registerServiceWorker';
 import reducers from './reducers';
 import loggerMiddleware from './middleware';
 import { saveState, getState } from './store/localStore';
-import mediaNotification from './media-session';
-// import createStoreObserver from  'redux-store-observer'
+import mediaNotification from './utils/media-session';
 
 getState().then((localState) => {
   let store;
