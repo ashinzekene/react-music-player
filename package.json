@@ -27,7 +27,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "predeploy": "npm run build",
-    "lint": "./node_modules/.bin/eslint src/**/* --fix && ./node_modules/.bin/eslint src/**/*",
+    "lint": "./node_modules/.bin/eslint src/**/* --fix",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
