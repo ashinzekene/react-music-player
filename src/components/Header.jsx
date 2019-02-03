@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
+import AppBar from '@material-ui/core/AppBar';
 import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton/IconButton';
-import NavMenuIcon from 'material-ui/svg-icons/navigation/menu';
+import Toolbar from '@material-ui/core/Toolbar';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
 import {
   HOME_PAGE, SETTINGS_PAGE, NOW_PLAYING_PAGE, PLAYLIST_PAGE,
@@ -18,12 +20,9 @@ const mapDispatchToProps = dispatch => ({
 
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-    };
-  }
+  state = {
+    open: false,
+  };
 
   openPage = page => () => {
     const { openPage, playState, openSnackbar } = this.props;
@@ -41,19 +40,22 @@ class Header extends Component {
     const { open } = this.state;
     return (
       <div>
-        <AppBar
-          iconElementLeft={<IconButton onClick={this.openPage()}><NavMenuIcon /></IconButton>}
-          style={{ backgroundColor: '#7050FA', position: 'fixed' }}
-          title="Music Player"
-        />
-        <div className="header-padding" style={{ height: '60px' }} />
-        <Drawer docked={false} open={open}>
-          <AppBar title="Menu" showMenuIconButton={false} />
+        <AppBar>
+          <Toolbar>
+            <IconButton onClick={this.openPage()} color="inherit" aria-label="Menu">
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" color="inherit">
+              Music Player
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <SwipeableDrawer anchor="left" open={open} onClose={this.openPage()} onOpen={this.openPage()}>
           <MenuItem onClick={this.openPage(HOME_PAGE)}>Home</MenuItem>
           <MenuItem onClick={this.openPage(NOW_PLAYING_PAGE)}>NowPlaying</MenuItem>
           <MenuItem onClick={this.openPage(PLAYLIST_PAGE)}>Playlists</MenuItem>
           <MenuItem onClick={this.openPage(SETTINGS_PAGE)}>Settings</MenuItem>
-        </Drawer>
+        </SwipeableDrawer>
       </div>
     );
   }

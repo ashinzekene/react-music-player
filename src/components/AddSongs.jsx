@@ -10,17 +10,11 @@ const mapDispatchToProps = dispatch => ({
 
 
 class AddSongs extends React.Component {
-  constructor(props) {
-    super(props);
-    this.addSong = this.addSong.bind(this);
-    this.triggerInput = this.triggerInput.bind(this);
-  }
-
-  triggerInput() {
+  triggerInput = () => {
     this.fileInput.click();
   }
 
-  addSong(e) {
+  addSong = (e) => {
     const { addSongs: add } = this.props;
     add(e.currentTarget.files);
   }

@@ -4,7 +4,8 @@ import { indigo400 } from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Snackbar from 'material-ui/Snackbar';
+import Snackbar from '@material-ui/core/Snackbar';
+import Button from '@material-ui/core/Button';
 import { NOW_PLAYING_PAGE, togglePlaying, playSong } from './actions';
 
 import MainView from './views/MainView';
@@ -169,7 +170,7 @@ class App extends Component {
     } = this.props;
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div>
+        <>
           <Header
             playState={playState}
             addToHomeScreenUIVisible={addToHomeScreenUIVisible}
@@ -209,13 +210,20 @@ class App extends Component {
             )}
           <Snackbar
             open={snackBarOpen}
-            action={!hideSnackAction && 'make a PR 😊'}
-            autoHideDuration={4000}
-            onActionClick={this.handleActionClick}
-            onRequestClose={this.handleRequestClose}
-            message={snackMsg || 'Not Implemented yet, You can make a PR 😊'}
+            autoHideDuration={6000}
+            onClose={this.handleRequestClose}
+            ContentProps={{ 'aria-describedby': 'message-id' }}
+            message={(
+              <span id="message-id">{snackMsg || 'Not Implemented yet, You can make a PR 😊'}</span>
+            )}
+            action={
+              !hideSnackAction && (
+                <Button key="undo" color="secondary" size="small" onClick={this.handleActionClick}>
+                  MAKE A PR
+                </Button>
+              )}
           />
-        </div>
+        </>
       </MuiThemeProvider>
     );
   }
