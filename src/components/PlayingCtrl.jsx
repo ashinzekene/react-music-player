@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
-import Paper from 'material-ui/Paper';
-import IconButton from 'material-ui/IconButton';
-import FontIcon from 'material-ui/FontIcon';
-import Slider from 'material-ui/Slider';
+import Slider from '@material-ui/lab/Slider';
+import Paper from '@material-ui/core/Paper';
+import SkipPrevious from '@material-ui/icons/SkipPrevious';
+import IconButton from '@material-ui/core/IconButton';
+import PlayIcon from '@material-ui/icons/PlayCircleFilled';
+import PauseIcon from '@material-ui/icons/PauseCircleFilled';
+import SkipNext from '@material-ui/icons/SkipNext';
+import ShuffleIcon from '@material-ui/icons/Shuffle';
+import Repeat from '@material-ui/icons/Repeat';
+import RepeatOne from '@material-ui/icons/RepeatOne';
 import { repeatType, togglePlaying } from '../actions';
 
 const mapStateToProps = state => ({
@@ -34,38 +40,46 @@ class PlayingCtrl extends Component {
       playState, song, playNext, playPrevious, currentTime, repeatType: repeat,
       togglePlaying: toggle, timeDrag, openSnackbar,
     } = this.props;
-    const button = playState.playing ? 'pause_circle_filled' : 'play_circle_filled';
-    const repeatButton = repeat === 0
-      ? (<FontIcon onClick={this.changeRepeat} style={{ color: 'rgba(0, 0, 0, 0.3)' }} className="material-icons">repeat</FontIcon>)
-      : (<IconButton><FontIcon onClick={this.changeRepeat} className="material-icons">{ repeat === 1 ? 'repeat_one' : 'repeat' }</FontIcon></IconButton>);
 
     return (
-      <Paper className="play-control" zDepth={0} rounded={false}>
+      <Paper className="play-control">
         <h3 className="song-title">{ song.name }</h3>
         <Slider style={{ height: '2px' }} className="song-progress" value={currentTime} onChange={(_, newVal) => timeDrag(newVal)} max={100} min={0} defaultValue={2} />
         <div className="now-playing-container">
           <div style={{ width: '35%', textAlign: 'center' }} className="side-icons">
-            { repeatButton }
-            <IconButton><FontIcon onClick={playPrevious} className="material-icons">skip_previous</FontIcon></IconButton>
+            <IconButton onClick={this.changeRepeat}>
+              { repeat === 1
+                ? <RepeatOne /> : <Repeat style={repeat === 2 ? {} : { opacity: 0.5 }} />
+              }
+            </IconButton>
+            <IconButton onClick={playPrevious}>
+              <SkipPrevious />
+            </IconButton>
           </div>
           <div style={{ width: '30%', textAlign: 'center' }} className="play-pause-button">
-            <IconButton><FontIcon onClick={toggle} style={{ fontSize: '50px', width: '50px' }} className="material-icons">{ button }</FontIcon></IconButton>
+            <IconButton onClick={toggle}>
+              { playState.playing ? <PauseIcon /> : <PlayIcon /> }
+            </IconButton>
           </div>
           <div style={{ width: '35%', textAlign: 'center' }} className="side-icons">
-            <IconButton><FontIcon onClick={playNext} className="material-icons">skip_next</FontIcon></IconButton>
-            <FontIcon
+            <IconButton onClick={playNext}>
+              <SkipNext />
+            </IconButton>
+            <ShuffleIcon
               className="material-icons"
               style={{ color: 'rgba(0, 0, 0, 0.3)' }}
               onClick={() => openSnackbar('Shuffle doesn\'t work yet, You can make a PR 😊')}
-            >
-              shuffle
-            </FontIcon>
+            />
           </div>
         </div>
       </Paper>
     );
   }
 }
+
+PlayingCtrl.defaultProps = {
+  installEvent: null,
+};
 
 PlayingCtrl.propTypes = {
   timeDrag: propTypes.func.isRequired,
@@ -78,7 +92,7 @@ PlayingCtrl.propTypes = {
   togglePlaying: propTypes.func.isRequired,
   song: propTypes.objectOf(propTypes.any).isRequired,
   playState: propTypes.objectOf(propTypes.any).isRequired,
-  installEvent: propTypes.oneOf([propTypes.func.isRequired, propTypes.any]).isRequired,
+  installEvent: propTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayingCtrl);

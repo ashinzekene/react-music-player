@@ -2,14 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import deepPurple from '@material-ui/core/colors/deepPurple';
+
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import reducers from './reducers';
 import loggerMiddleware from './middleware';
 import { saveState, getState } from './store/localStore';
-import mediaNotification from './media-session';
-// import createStoreObserver from  'redux-store-observer'
+import mediaNotification from './utils/media-session';
+
+const muiTheme = createMuiTheme({
+  palette: {
+    primary: deepPurple,
+  },
+});
+
 
 getState().then((localState) => {
   let store;
@@ -27,7 +36,9 @@ getState().then((localState) => {
   ReactDOM.render(
     // eslint-disable-next-line
     <Provider store={store}>
-      <App />
+      <MuiThemeProvider theme={muiTheme}>
+        <App />
+      </MuiThemeProvider>
     </Provider>, document.getElementById('root'),
   );
 });

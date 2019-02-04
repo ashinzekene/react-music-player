@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { indigo400 } from 'material-ui/styles/colors';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Snackbar from 'material-ui/Snackbar';
+import Snackbar from '@material-ui/core/Snackbar';
+import Button from '@material-ui/core/Button';
 import { NOW_PLAYING_PAGE, togglePlaying, playSong } from './actions';
 
 import MainView from './views/MainView';
@@ -12,12 +10,6 @@ import Header from './components/Header';
 import PlayingView from './views/PlayingView';
 import keyboardEvents from './utils/keyboardEvents';
 
-
-const muiTheme = getMuiTheme({
-  palette: {
-    primary1Color: indigo400,
-  },
-});
 
 const mapStateToProps = state => ({
   page: state.page,
@@ -58,7 +50,6 @@ class App extends Component {
     window.addEventListener('beforeinstallprompt', (e) => {
       // Prevent Chrome 67 and earlier from automatically showing the prompt
       e.preventDefault();
-      console.log('before install fired', e);
       // Stash the event so it can be triggered later.
       this.setState({ installEvent: e, addToHomeScreenUIVisible: true });
     });
@@ -71,10 +62,11 @@ class App extends Component {
       if (!nextProps.playState.playing) {
         // PAUSE
         this.audioPlayer.pause();
-      } else if (nextProps.playState.songId === 0) {
+      } else if (nextProps.playState.songId === -1) {
         this.playSong(0);
       } else if (nextProps.playState.songId === playState.songId) {
         // RESUME
+        console.log('Should only resume');
         this.audioPlayer.play();
         // Start playing
       } else {
@@ -84,12 +76,10 @@ class App extends Component {
         installEvent.prompt();
         installEvent.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
-            console.log('User accepted the A2HS prompt');
             this.setState({
               snackBarOpen: true, hideSnackAction: true, snackMsg: '🤗 Yay! You\'ve installed the app',
             });
           } else {
-            console.log('User dismissed the A2HS prompt');
             this.setState({
               snackBarOpen: true,
               hideSnackAction: true,
@@ -121,7 +111,7 @@ class App extends Component {
     // No repeat
     if (repeatType === 0) {
       URL.revokeObjectURL(songs[playState.songId]);
-      if (playState.songId < songs.length) play(playState.songId + 1);
+      if (playState.songId < songs.length - 1) play(playState.songId + 1);
     } else if (repeatType === 1) {
       // repeat one
       play(playState.songId);
@@ -168,57 +158,62 @@ class App extends Component {
       currentTime, snackBarOpen, snackMsg, installEvent, addToHomeScreenUIVisible, hideSnackAction,
     } = this.state;
     const {
-      songs, playState, openNowPlaying, toggle, repeatType, page,
+      songs, playState, toggle, repeatType, page,
     } = this.props;
     return (
-      <MuiThemeProvider muiTheme={muiTheme}>
-        <div>
-          <Header
-            playState={playState}
-            addToHomeScreenUIVisible={addToHomeScreenUIVisible}
-            playingSong={songs[playState.songId]}
-            openSnackbar={() => this.setState({ snackBarOpen: true })}
-          />
-          <audio
-            hidden
-            controls
-            onEnded={this.songEnded}
-            onTimeUpdate={this.updateTime}
-            ref={(audio) => { this.audioPlayer = audio; }}
-          >
-            <track kind="captions" {...{}} />
-          </audio>
-          {
-            page === NOW_PLAYING_PAGE ? (
-              <PlayingView
-                repeatType={repeatType}
-                playNext={this.playNext}
-                timeDrag={this.timeDrag}
-                installEvent={installEvent}
-                currentTime={currentTime}
-                playPrevious={this.playPrevious}
-                playingSong={songs[playState.songId]}
-                openSnackbar={msg => this.setState({ snackBarOpen: true, snackMsg: msg })}
-              />) : (
-                <MainView
-                  songs={songs}
-                  toggle={toggle}
-                  playState={playState}
-                  currentTime={currentTime}
-                  openNowPlaying={openNowPlaying}
-                  openSnackbar={msg => this.setState({ snackBarOpen: true, snackMsg: msg })}
-                />)
-          }
-          <Snackbar
-            open={snackBarOpen}
-            action={!hideSnackAction && 'make a PR 😊'}
-            autoHideDuration={4000}
-            onActionClick={this.handleActionClick}
-            onRequestClose={this.handleRequestClose}
-            message={snackMsg || 'Not Implemented yet, You can make a PR 😊'}
-          />
-        </div>
-      </MuiThemeProvider>
+      <>
+        <Header
+          playState={playState}
+          addToHomeScreenUIVisible={addToHomeScreenUIVisible}
+          playingSong={songs[playState.songId]}
+          openSnackbar={() => this.setState({ snackBarOpen: true })}
+        />
+        <audio
+          hidden
+          controls
+          onEnded={this.songEnded}
+          onTimeUpdate={this.updateTime}
+          ref={(audio) => { this.audioPlayer = audio; }}
+        >
+          <track kind="captions" {...{}} />
+        </audio>
+        {
+          page === NOW_PLAYING_PAGE ? (
+            <PlayingView
+              repeatType={repeatType}
+              playNext={this.playNext}
+              timeDrag={this.timeDrag}
+              installEvent={installEvent}
+              currentTime={currentTime}
+              playPrevious={this.playPrevious}
+              playingSong={songs[playState.songId]}
+              openSnackbar={msg => this.setState({ snackBarOpen: true, snackMsg: msg })}
+            />
+          ) : (
+            <MainView
+              songs={songs}
+              toggle={toggle}
+              playState={playState}
+              currentTime={currentTime}
+              openSnackbar={msg => this.setState({ snackBarOpen: true, snackMsg: msg })}
+            />
+          )}
+        <Snackbar
+          open={snackBarOpen}
+          autoHideDuration={6000}
+          onClose={this.handleRequestClose}
+          ContentProps={{ 'aria-describedby': 'message-id' }}
+          message={(
+            <span id="message-id">{snackMsg || 'Not Implemented yet 😊'}</span>
+          )}
+          action={
+            !hideSnackAction && (
+              <Button key="undo" color="secondary" size="small" onClick={this.handleActionClick}>
+                MAKE A PR
+              </Button>
+            )}
+        />
+      </>
     );
   }
 }
