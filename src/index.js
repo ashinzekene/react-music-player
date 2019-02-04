@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import indigo from '@material-ui/core/colors/indigo';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 
 import './index.css';
 import App from './App';
@@ -15,7 +15,7 @@ import mediaNotification from './utils/media-session';
 
 const muiTheme = createMuiTheme({
   palette: {
-    primary1Color: indigo,
+    primary: deepPurple,
   },
 });
 

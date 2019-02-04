@@ -81,7 +81,7 @@ class Header extends Component {
         </AppBar>
         <div className="header-padding" style={{ height: '55px' }} />
         <SwipeableDrawer anchor="left" open={open} onClose={this.openPage()} onOpen={this.openPage()}>
-          <ListItem button />
+          <div style={{ paddingTop: '50px' }} />
           {
             menuOptions.map(option => (
               <ListItem key={option.option} button onClick={this.openPage(option.page)}>
