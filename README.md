@@ -1,5 +1,7 @@
 # MUSIC PLAYER
 
+[![Build Status](https://travis-ci.com/ashinzekene/react-music-player.svg?branch=master)](https://travis-ci.com/ashinzekene/react-music-player)
+
  A react music player PWA that plays local files using the Files API
 
  [CHECK OUT THE WEB APP](https://ashinzekene.github.io/react-music-player)
