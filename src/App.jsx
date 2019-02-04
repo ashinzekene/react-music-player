@@ -77,7 +77,10 @@ class App extends Component {
         installEvent.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
             this.setState({
-              snackBarOpen: true, hideSnackAction: true, snackMsg: '🤗 Yay! You\'ve installed the app',
+              snackBarOpen: true,
+              hideSnackAction: true,
+              hasRejectedInstall: false,
+              snackMsg: '🤗 Yay! You\'ve installed the app',
             });
           } else {
             this.setState({
