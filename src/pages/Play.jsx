@@ -1,9 +1,11 @@
 import React from 'react';
-import { Box, IconButton, Flex, Text, Slider, SliderTrack, SliderFilledTrack, SliderThumb, } from '@chakra-ui/core';
-import { IoIosPlayCircle, IoIosSkipForward, IoIosSkipBackward } from 'react-icons/io'
+import {
+  Box, IconButton, Flex, Text, Slider, SliderTrack, SliderFilledTrack, SliderThumb,
+} from '@chakra-ui/core';
+import { IoIosPlayCircle, IoIosSkipForward, IoIosSkipBackward } from 'react-icons/io';
 
 const Play = () => (
-  <Box w="100vw" h="100vh" p={5}>
+  <Box w="100vw" h="100vh" p={5} maxW={800} margin="auto">
     <Flex justifyContent="space-between" alignItems="center" direction="column">
       <Box w="100%" py={4}>
         <IconButton
@@ -43,20 +45,20 @@ const Play = () => (
         <Box w="80%" margin="auto">
           <Flex justifyContent="space-around" alignItems="center">
             <Box>
-              <Box as={IoIosSkipBackward} size="28px"/>
+              <Box as={IoIosSkipBackward} size="28px" />
             </Box>
             <Box>
-              <Box as={IoIosPlayCircle} size="70px"/>
+              <Box as={IoIosPlayCircle} size="70px" />
             </Box>
             <Box>
-              <Box as={IoIosSkipForward} size="28px"/>
+              <Box as={IoIosSkipForward} size="28px" />
             </Box>
           </Flex>
         </Box>
       </Box>
 
     </Flex>
-</Box>
+  </Box>
 );
 
 export default Play;
