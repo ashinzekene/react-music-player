@@ -2,12 +2,22 @@ import React from 'react';
 import {
   IconButton, Menu, MenuButton, MenuList, MenuItem,
 } from '@chakra-ui/core';
+import 'assert';
 import { IoIosAdd } from 'react-icons/io';
+import { processSong } from '../utils';
+import { useSongState } from '../state';
 
 const AddSong = () => {
-  const add = (e) => {
-    console.log(e.files);
+  const { addSongs } = useSongState();
+
+  const add = async ({ target }) => {
+    if (!target.files) return;
+    const songs = await Promise.all(
+      [...target.files].map(processSong),
+    );
+    addSongs(songs);
   };
+
   return (
     <>
       <Menu isOpen>

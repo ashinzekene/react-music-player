@@ -2,7 +2,31 @@ import React, {
   createContext, useState, useEffect, useContext,
 } from 'react';
 import PropTypes from 'prop-types';
-import { getSongsFromStorage, getPlayStateFromStorage } from './storage';
+import {
+  getSongsFromStorage, getPlayStateFromStorage, setPlayStateInStorage, setSongsInStorage,
+} from './storage';
+
+/**
+ *
+ * PlayState
+ * @typedef {Object} PlayState
+ * @property {Boolean} playing - Whether the song is playing or not
+ * @property {1|2|3} repeat - 0 - No repeat, 1 - Repeat current track, 2 repeat all
+ * @property {Number} currrent - The index of the currently playing songs
+ * @property {Number} progress - Play progress
+ *
+ * Song
+ * @typedef {Object} Song
+ * @property {Boolean} title - Title of the song
+ * @property {String} artist - Main artist
+ * @property {String[]} artists - All artists
+ * @property {String} album - Song album
+ * @property {String[]} genre - Genres of the song
+ * @property {Number} year - Year of release
+ * @property {any[]} picture - Album arts
+ * @property {any} track - Song track
+ */
+
 
 const StateContext = createContext();
 
@@ -24,7 +48,7 @@ export function useProvideState() {
   const getInitialSongs = async () => {
     const initalSongs = await getSongsFromStorage();
     if (initalSongs) {
-      setSongs(songs);
+      setSongs(initalSongs);
     }
   };
 
@@ -40,12 +64,20 @@ export function useProvideState() {
     getInitialPlayState();
   }, []);
 
-  const addSongs = () => {
+  useEffect(() => {
+    setSongsInStorage(songs);
+  }, [songs.length]);
 
+  useEffect(() => {
+    setPlayStateInStorage(songs);
+  }, [playState]);
+
+  const addSongs = (newSongs = []) => {
+    setSongs([...songs, ...newSongs]);
   };
 
-  const removeSongs = () => {
-
+  const removeSong = (i) => {
+    setSongs(songs.filter((s, index) => index !== i));
   };
 
   const route = (page) => setAppState({ ...appState, page });
@@ -92,12 +124,35 @@ export function useProvideState() {
     songState: {
       songs,
       addSongs,
-      removeSongs,
+      removeSong,
     },
   };
 }
 
-export const usePlayState = () => useContext(StateContext);
+/**
+ * @returns {{
+ *  next: (song: Song) => Song[]
+ *  state: PlayState
+ *  previous: (song: Song) => Song[]
+ *  togglePlaying: (song: Song) => Song[]
+ * }}
+ */
+export const usePlayState = () => useContext(StateContext).playState;
+/**
+ * @returns {{
+ *  removeSong: (song: Song) => Song[]
+ *  songs: Song[]
+ *  addSongs: (song: Song[]) => Song[]
+ * }}
+ */
+export const useSongState = () => useContext(StateContext).songState;
+/**
+ * @returns {{
+ *  route: (route: Number) => Song[]
+ *  state: { page: Number }
+ * }}
+ */
+export const useAppState = () => useContext(StateContext).appState;
 
 export function ProvideState({ children }) {
   const state = useProvideState();
