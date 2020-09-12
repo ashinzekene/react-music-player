@@ -5,15 +5,27 @@ import Album from '@material-ui/icons/Album';
 import PlayingCtrl from '../components/PlayingCtrl';
 
 const PlayingView = ({
-  playNext, timeDrag, repeatType, currentTime,
-  playingSong, openSnackbar, playPrevious, installEvent,
+  playNext,
+  timeDrag,
+  repeatType,
+  currentTime,
+  playingSong,
+  openSnackbar,
+  playPrevious,
+  installEvent,
 }) => (
   <div>
-    <div style={{
-      display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '30px',
-    }}
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '30px',
+      }}
     >
-      <Album style={{ width: '300px', fontSize: '300px', color: 'rgba(0,0,0,0.3)' }} />
+      <Album
+        style={{ width: '300px', fontSize: '300px', color: 'rgba(0,0,0,0.3)' }}
+      />
     </div>
     <PlayingCtrl
       song={playingSong}

@@ -9,11 +9,16 @@ import Avatar from '@material-ui/core/Avatar';
 import MoreVert from '@material-ui/icons/MoreVert';
 import MusicNote from '@material-ui/icons/MusicNote';
 
-const Song = ({ song, handleClick, handleIconClick }) => (
+import EqualizerIcon from '@material-ui/icons/Equalizer';
+
+
+const Song = ({
+  song, handleClick, handleIconClick, isPlaying,
+}) => (
   <ListItem className="song" onClick={handleClick}>
     <ListItemAvatar>
       <Avatar>
-        <MusicNote />
+        { !isPlaying ? <MusicNote /> : <EqualizerIcon /> }
       </Avatar>
     </ListItemAvatar>
     <ListItemText
@@ -32,5 +37,6 @@ Song.propTypes = {
   song: PropTypes.objectOf(PropTypes.any).isRequired,
   handleClick: PropTypes.func.isRequired,
   handleIconClick: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
 };
 export default Song;
