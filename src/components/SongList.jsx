@@ -9,7 +9,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { removeSong, playSong } from '../actions';
 import Song from './Song';
 
-const SongList = ({ songs, remove, play }) => {
+const mapStateToProps = store => ({
+  playState: store.playState,
+});
+
+const SongList = ({
+  songs, remove, play, playState,
+}) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const [activeSong, setActiveSong] = useState(-1);
@@ -40,6 +46,7 @@ const SongList = ({ songs, remove, play }) => {
                 handleClick={handleSongClick(ind)}
                 handleIconClick={setActiveSongItem(ind)}
                 song={song}
+                isPlaying={ind === playState.songId}
               />,
               <Divider key={`divider-${song.lastModifiedDate}`} />,
             ]
@@ -54,6 +61,7 @@ SongList.propTypes = {
   remove: PropTypes.func.isRequired,
   play: PropTypes.func.isRequired,
   songs: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
+  playState: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-export default connect(null, { remove: removeSong, play: playSong })(SongList);
+export default connect(mapStateToProps, { remove: removeSong, play: playSong })(SongList);
