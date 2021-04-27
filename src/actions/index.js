@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import mediaSession from '../utils/media-session';
 
 export const ADD_SONGS = 'ADD_SONGS';
