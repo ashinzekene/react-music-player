@@ -13,7 +13,9 @@ const mapStateToProps = store => ({
   playState: store.playState,
 });
 
-const SongList = ({ songs, remove, play, playState }) => {
+const SongList = ({
+  songs, remove, play, playState,
+}) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const [activeSong, setActiveSong] = useState(-1);
